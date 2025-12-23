@@ -2,7 +2,7 @@ import React from "react";
 
 import "./styles.css";
 
-
+import Tablet from "../../compenents/Tablet";
 
 
 type State = {}
@@ -14,8 +14,10 @@ export default class Exo1 extends React.Component<Props, State> {
     render(){
         return(
             <main>
+                
+                <Tablet />
 
-                <h1>Exo1</h1>
+                {/* <h1>Exo1</h1>
 
                 <div className = "content">
 
@@ -63,7 +65,7 @@ export default class Exo1 extends React.Component<Props, State> {
 
                 <footer>
                     <h3><a href="/"> Retour a l'acceuil</a></h3>
-                </footer>
+                </footer> */}
             </main>
 
         )

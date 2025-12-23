@@ -1,0 +1,17 @@
+.tablet{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-image: url("./backgroundTablet.svg");
+    background-repeat: repeat;
+}
+
+.tabletContent{
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+.tablet > *{
+    display: flex;
+}

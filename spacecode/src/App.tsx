@@ -1,5 +1,7 @@
 import React from 'react';
 
+import "./App.css"
+
 import Home from "./pages/Home"
 import Exercices from "./pages/Exercices"
 import Exo1 from "./pages/Exo1"
