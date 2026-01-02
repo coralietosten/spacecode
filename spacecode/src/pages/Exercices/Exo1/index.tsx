@@ -14,7 +14,7 @@ export default class Exo1 extends React.Component<Props, State> {
     instructionTitre: string;
     instructionText: string;
     defaultCode: string;
-    solutionCode: string;
+    solutionCode: string[];
 
     constructor(props: Props){
         super(props);
@@ -25,9 +25,7 @@ export default class Exo1 extends React.Component<Props, State> {
 <h1>Bonjour le monde !</h1>
 <p>Ceci est mon premier code HTML.</p>
 `;
-        this.solutionCode = 
-`
-`;
+        this.solutionCode = ["<h1>Bonjour le monde !</h1>", "<p>Ceci est mon premier code HTML.</p>"];
     }
 
     render(){
