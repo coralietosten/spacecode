@@ -1,6 +1,7 @@
 :root{
   --background-pages : #0C3165;
   --yellow : #FAFF00;
+  --yellow_t : rgba(250, 255, 0, 0.9);
   --black : #000000;
 
   --grey_lime : #EDEDED;
@@ -11,6 +12,8 @@
 
 body{
   background-color: var(--background-pages);
+  overflow: hidden;
+  position: absolute;
 }
 
 main{
@@ -19,3 +22,19 @@ main{
 
   margin: 10px
 }
+
+.particle {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: yellow;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+
+/* html, body {
+    margin: 0;
+    padding: 0;
+    scroll-behavior: auto; 
+} */

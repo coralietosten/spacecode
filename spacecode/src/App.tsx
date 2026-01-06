@@ -5,6 +5,7 @@ import "./App.css"
 import Home from "./pages/Home"
 import Exercices from "./pages/Exercices"
 import Exo1 from "./pages/Exo1"
+import Animation from './pages/Animation';
 
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/exercice" element={<Exercices />} />
         <Route path="/exercice/1" element={<Exo1/>} />
+        <Route path="/anim" element={<Animation/>} />
 
       </Routes>
 
