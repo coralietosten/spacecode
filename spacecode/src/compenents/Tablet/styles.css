@@ -6,12 +6,29 @@
     background-repeat: repeat;
 }
 
-.tabletContent{
-    flex: 1;
-    align-items: center;
-    justify-content: center;
+.code-zone{
+    max-width: 500px;
 }
 
-.tablet > *{
+.menu-code-zone{
     display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 5px;
+    background-color: var(--white);
+}
+
+.bouton-valider{
+    background-color: var(--green);
+}
+
+
+.result-zone{
+    color: white;
+    padding: 10px;
+    background-color: var(--blue_t);
+    border: 2px solid var(--white);
+    /* filter:drop-shadow(0 0 20px var(--grey_lime)); */
+    box-shadow: 0 0 20px var(--grey_lime);
 }

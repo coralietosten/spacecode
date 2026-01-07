@@ -1,5 +1,6 @@
 import React from "react";
-import ExoTemplate1 from "../../ExoTemplate1";
+import ExoTemplate1 from "../ExoTemplate1 copy";
+// import ExoTemplate1 from "../ExoTemplate1";
 
 import "./styles.css";
 

@@ -1,4 +1,5 @@
 :root{
+  --white : #FFF;
   --background-pages : #0C3165;
   --yellow : #FAFF00;
   --yellow_t : rgba(250, 255, 0, 0.9);
@@ -6,14 +7,16 @@
 
   --grey_lime : #EDEDED;
   --grey : #BEBEBE;
-  --blue_t : #0D05FF; /* 30% */
+  --blue_t : rgba(13, 5, 255, 0.5); /* 30% */
+
+  --green : #00C832;
 }
 
 
 body{
   background-color: var(--background-pages);
   overflow: hidden;
-  position: absolute;
+  /* position: absolute; */
 }
 
 main{
@@ -38,3 +41,22 @@ main{
     padding: 0;
     scroll-behavior: auto; 
 } */
+
+button{
+  padding: 5px 10px;
+  background: var(--background-pages);
+  border: 1px solid var(--black);
+  border-radius: 10px;
+  color: var(--white);
+  
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+  justify-content: center;
+}
+
+button img{
+  width: 15px;
+  height: 15px;
+}

@@ -1,4 +1,4 @@
-
+/* 
 .content{
     display: flex;
     flex-direction: column;
@@ -40,4 +40,30 @@
   border:2px dashed #aaa; border-radius:8px;
   background:#f8f8f8;
   
+} */
+
+
+.tablet-content{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    padding: 5%;
+    /* justify-content: space-between; */
+    flex: 1;
+    justify-content: center;
+    
+
+    height: 500px;
 }
+
+.tablet-content > div{
+    width: 100%;
+}
+
+
+
+
+
+
+
+
