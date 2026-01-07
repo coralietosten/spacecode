@@ -1,4 +1,5 @@
 import React from "react";
+import ExoTemplate1 from "../../ExoTemplate1";
 
 import "./styles.css";
 
@@ -10,64 +11,31 @@ type Props = {}
 
 export default class Exo1 extends React.Component<Props, State> {
 
+    instructionTitre: string;
+    instructionText: string;
+    defaultCode: string;
+    solutionCode: string[];
+
+    constructor(props: Props){
+        super(props);
+        this.instructionTitre = "Voici l'exo 1";
+        this.instructionText = "faites ce que vous voulez";
+        this.defaultCode = 
+`
+<h1>Bonjour le monde !</h1>
+<p>Ceci est mon premier code HTML.</p>
+`;
+        this.solutionCode = ["<h1>Bonjour le monde !</h1>", "<p>Ceci est mon premier code HTML.</p>"];
+    }
 
     render(){
         return(
-            <main>
-                
-                <Tablet />
-
-                {/* <h1>Exo1</h1>
-
-                <div className = "content">
-
-                    <div className = "instructions">
-                        <h2>Instructions :</h2>
-                        <p>
-                            Voici le premier exercice.
-                        </p>
-                    </div>
-
-
-                    <div className = "work-space">
-
-                        <div className="first-panel">
-
-                            <textarea id="zone-code" className="zone">
-                                <table>
-                                    <tr>
-                                    <th>Nom</th>
-                                    <th>Age</th>
-                                    <th>Pays</th>
-                                    </tr>
-                                    <tr>
-                                    <td>Jean</td>
-                                    <td>25</td>
-                                    <td>France</td>
-                                    </tr>
-                                    <tr>
-                                    <td>Marie</td>
-                                    <td>30</td>
-                                    <td>Canada</td>
-                                    </tr>
-                                </table> 
-                            </textarea>
-                                
-                        </div>
-
-                        <div className="first-panel">
-                            <div id="zone-affichage" className="zone">
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
-                <footer>
-                    <h3><a href="/"> Retour a l'acceuil</a></h3>
-                </footer> */}
-            </main>
-
+            <ExoTemplate1
+                instructionTitre={this.instructionTitre}
+                instructionText={this.instructionText}
+                defaultCode={this.defaultCode}
+                solutionCode={this.solutionCode}
+            />
         )
     }
 }
