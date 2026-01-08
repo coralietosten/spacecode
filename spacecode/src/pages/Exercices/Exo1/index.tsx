@@ -22,7 +22,7 @@ export default class Exo1 extends React.Component<Props, State> {
         this.instructionText = "faites ce que vous voulez";
         this.defaultCode = 
 `
-<h1>Bonjour le monde !</h1>
+<h1>Bonjour le monde !<>
 <p>Ceci est mon premier code HTML.</p>
 `;
         this.solutionCode = ["<h1>Bonjour le monde !</h1>", "<p>Ceci est mon premier code HTML.</p>"];
