@@ -7,7 +7,7 @@
 
   --grey_lime : #EDEDED;
   --grey : #BEBEBE;
-  --blue_t : rgba(13, 5, 255, 0.5); /* 30% */
+  --blue_t : rgba(13, 5, 255, 0.25); /* 30% */
 
   --green : #00C832;
 }

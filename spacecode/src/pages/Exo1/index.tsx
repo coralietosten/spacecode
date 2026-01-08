@@ -1,6 +1,5 @@
 import React from "react";
-import ExoTemplate1 from "../ExoTemplate1 copy";
-// import ExoTemplate1 from "../ExoTemplate1";
+import ExoTemplate1 from "../ExoTemplate1";
 
 import "./styles.css";
 
@@ -23,7 +22,7 @@ export default class Exo1 extends React.Component<Props, State> {
         this.instructionText = "faites ce que vous voulez";
         this.defaultCode = 
 `
-<h1>Bonjour le monde !</h1>
+<h1>Bonjour le monde !<>
 <p>Ceci est mon premier code HTML.</p>
 `;
         this.solutionCode = ["<h1>Bonjour le monde !</h1>", "<p>Ceci est mon premier code HTML.</p>"];
@@ -31,7 +30,7 @@ export default class Exo1 extends React.Component<Props, State> {
 
     render(){
         return(
-            <ExoTemplate1
+            <Tablet
                 instructionTitre={this.instructionTitre}
                 instructionText={this.instructionText}
                 defaultCode={this.defaultCode}

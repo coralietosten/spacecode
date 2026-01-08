@@ -12,7 +12,12 @@ type State = {
     codeAffiche : string
     nbcomplet : number
 }
-type Props = {}
+type Props = {
+    instructionTitre: string;
+    instructionText: string;
+    defaultCode: string;
+    solutionCode: string[];
+};
 
 export default class Tablet extends React.Component<Props, State> {
 
@@ -20,17 +25,11 @@ export default class Tablet extends React.Component<Props, State> {
         super(props)
 
         this.state = {
-            codeAffiche : "<div>\n bojnjour\n</div>\n",
+            codeAffiche : props.defaultCode,
             nbcomplet : 0
         }
     }
 
-    updatecode = (value : string | undefined) => {
-        console.log(value)
-        if (value){
-            this.setState({codeAffiche : value})
-        }
-    }
 
     exerciceComplet = () =>{
         if (true) // vérifie la complession
@@ -38,6 +37,78 @@ export default class Tablet extends React.Component<Props, State> {
             this.setState({nbcomplet:this.state.nbcomplet+1})
         }
     }
+
+
+
+    ///
+
+    skipSpaces = (html: string, i: number): number => {
+      while (i < html.length && /\s/.test(html[i])) i++;
+      return i;
+    };
+
+    match = (html: string, i: number, str: string): boolean => {
+      i = this.skipSpaces(html, i);
+      if (html.startsWith(str, i)) {
+        return true;
+      }
+      return false;
+    };
+
+    verifyExoCompletion = (html : string) => {
+
+        let i = 0;
+        
+        for (let solution of this.props.solutionCode) {
+
+
+            i = this.skipSpaces(html, i);
+
+            if(! this.match(html, i, solution) ) {
+                return false;
+            }
+
+            i += solution.length;
+        }
+
+        return true;
+    };
+
+    onChange = (newValue: string | undefined) => {
+        
+        if (newValue == undefined){
+            return
+        }
+
+        this.setState({ codeAffiche: newValue });
+
+        if (this.verifyExoCompletion(newValue)) {
+            
+            console.log('Table with tr found');
+
+            const display = document.querySelector(".result-zone") as HTMLElement;
+            console.log(display)
+            if (display !== null) {
+                let blink = true;
+                if (window._blinkInterval) {
+                    clearInterval(window._blinkInterval);
+                }
+                window._blinkInterval = setInterval(() => {
+                    display.style.color = blink ? '#90EE90' : '';
+                    blink = !blink;
+                }, 200);
+            }
+        } else {
+            console.log('Structure incorrecte');
+            if (window._blinkInterval) {
+                clearInterval(window._blinkInterval);
+                window._blinkInterval = undefined;
+            }
+        }
+    };
+
+
+    ///
 
     render() {
         return (
@@ -56,8 +127,8 @@ export default class Tablet extends React.Component<Props, State> {
                                 width= "500px"
                                 language="html"
                                 theme="vs-dark"
-                                value={"<div>\n bojnjour\n</div>\n"}
-                                onChange={this.updatecode}
+                                value={this.state.codeAffiche}
+                                onChange={(val) => this.onChange(val)}
                                 options={{
                                     automaticLayout: true,
                                     minimap: { enabled: true },
