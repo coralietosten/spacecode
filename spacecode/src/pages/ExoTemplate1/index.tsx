@@ -87,6 +87,10 @@ export default class ExoTemplate1 extends React.Component<Props, State> {
             if (window._blinkInterval) {
                 clearInterval(window._blinkInterval);
                 window._blinkInterval = undefined;
+                const display = document.getElementById("zone-affichage");
+                if (display) {
+                    display.style.color = '';
+                }
             }
         }
     };
