@@ -1,5 +1,4 @@
 import React from "react";
-import ExoTemplate1 from "../ExoTemplate1";
 
 import "./styles.css";
 
@@ -18,8 +17,8 @@ export default class Exo1 extends React.Component<Props, State> {
 
     constructor(props: Props){
         super(props);
-        this.instructionTitre = "Voici l'exo 1";
-        this.instructionText = "faites ce que vous voulez";
+        this.instructionTitre = "Niveau 1";
+        this.instructionText = "vous devez corriger le programme";
         this.defaultCode = 
 `
 <h1>Bonjour le monde !<>
@@ -30,12 +29,14 @@ export default class Exo1 extends React.Component<Props, State> {
 
     render(){
         return(
-            <Tablet
-                instructionTitre={this.instructionTitre}
-                instructionText={this.instructionText}
-                defaultCode={this.defaultCode}
-                solutionCode={this.solutionCode}
-            />
+            <main>
+                <Tablet
+                    instructionTitre={this.instructionTitre}
+                    instructionText={this.instructionText}
+                    defaultCode={this.defaultCode}
+                    solutionCode={this.solutionCode}
+                />
+            </main>
         )
     }
 }

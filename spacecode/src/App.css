@@ -23,7 +23,7 @@ main{
   display: flex;
   flex-direction: column;
 
-  margin: 10px
+  margin: 20px
 }
 
 .particle {
@@ -59,4 +59,8 @@ button{
 button img{
   width: 15px;
   height: 15px;
+}
+
+h1,p{
+  margin: 0;
 }
