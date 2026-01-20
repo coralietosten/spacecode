@@ -17,5 +17,5 @@ ssh etudiants@172.26.83.12
 
 `spacecode\.env`
 ```bash
-PORT=8080
+PORT=8080 //default_port
 ```
