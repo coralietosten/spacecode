@@ -15,6 +15,7 @@ deploy_production:
     - chmod 600 ~/.ssh/id_rsa
     - ssh-add ~/.ssh/id_rsa # > /dev/null 2>&1
     - echo "SERVER_IP=$SERVER_IP"
+    - ping -c 2 $SERVER_IP
     - ssh-keyscan $SERVER_IP # >> ~/.ssh/known_hosts
   script:
     - ssh $SERVER_USER@$SERVER_IP "cd $SERVER_PATH && ./launchServeur.bash"
