@@ -7,7 +7,7 @@ deploy_production:
     - main
   before_script:
     - apt-get update -y --fix-missing
-    - apt-get install -y --fix-missing openssh-client
+    - apt-get install -y --fix-missing openssh-client iputils-ping
     - eval $(ssh-agent -s)
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
