@@ -18,7 +18,7 @@ export default class TabletEdge extends React.Component<Props, State> {
     render() {
         return (
             <div className="tabletEdge">
-                <img style={{rotate : `${this.props.rotate || 0}deg`}} src={`/assets/tabletEdgeV${this.props.value%3}.svg`} alt="" />
+                <img style={{rotate : `${this.props.rotate || 0}deg`}} src={`/assets/tabletEdgev${this.props.value%3}.svg`} alt="" />
             </div>
 
         )
