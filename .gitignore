@@ -5,3 +5,5 @@ test.*
 package-lock.json
 
 .env
+
+*.db
