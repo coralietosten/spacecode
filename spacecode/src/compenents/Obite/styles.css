@@ -1,0 +1,7 @@
+.star{
+    filter : drop-shadow(0 0 20px var(--yellow_t));
+}
+
+.starOff{
+    filter : drop-shadow(0 0 20px var(--grey_lime));
+}
