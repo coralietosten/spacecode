@@ -1,11 +1,11 @@
-DROP TABLE Utilisateur;
-DROP TABLE Niveau;
-DROP TABLE Indices;
-DROP TABLE Exercices_termines;
-DROP TABLE Exercices;
-DROP TABLE Exercice_suivant;
-DROP TABLE Cours;
-DROP TABLE Indices_utilises; 
+-- DROP TABLE Utilisateur;
+-- DROP TABLE Niveau;
+-- DROP TABLE Indices;
+-- DROP TABLE Exercices_termines;
+-- DROP TABLE Exercices;
+-- DROP TABLE Exercice_suivant;
+-- DROP TABLE Cours;
+-- DROP TABLE Indices_utilises; 
 
 CREATE TABLE IF NOT EXISTS Cours
 (
@@ -78,7 +78,7 @@ CREATE TABLE IF NOT EXISTS Utilisateur
 (
   Id_utilisateur INTEGER NOT NULL,
   Nom            VARCHAR NULL    ,
-  Mdp				  VARCHAR NOT NULL, 
+  Mdp				  VARCHAR NULL, 
   Prenom         VARCHAR NULL    ,
   Photo          VARCHAR NULL    ,
   Email          VARCHAR NOT NULL UNIQUE ,
