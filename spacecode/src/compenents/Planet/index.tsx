@@ -2,10 +2,9 @@
 
 import React from "react";
 
-import { RGB, randomColor, complementaryColor, generateAnaloguesRGB, rgbToHex } from "../../extensions/colors"
+import { RGB, randomColor, generateAnaloguesRGB, rgbToHex } from "../../extensions/colors"
 
 import "./styles.css";
-import { NumericLiteral } from "typescript";
 
 type State = {}
 type Props = {
@@ -20,6 +19,8 @@ export default class Planet extends React.Component<Props, State> {
 
     color1: RGB
     color2: RGB
+
+    private svgref = React.createRef<SVGSVGElement>()
 
     constructor(props: Props) {
         super(props)
@@ -36,18 +37,18 @@ export default class Planet extends React.Component<Props, State> {
         scale: 1
     }
 
+    public getDom(): SVGSVGElement | null {
+        return this.svgref.current;
+    }
+
     render() {
 
-        const halfWidth = 0
-        console.log(this.props.rad)
         const xpos = this.props.xpos! +(Math.sin(this.props.rad!)*this.props.distance!)
-        console.log("sin",(Math.sin(this.props.rad!)*this.props.distance!))
         const ypos = this.props.ypos! +(Math.cos(this.props.rad!)*this.props.distance!)
-        console.log("cos",(Math.cos(this.props.rad!)*this.props.distance!))
 
         return (
 
-            <svg width="110" height="110" viewBox="0 0 110 110" fill="none"
+            <svg ref={this.svgref} width="110" height="110" viewBox="0 0 110 110" fill="none"
                 className="planet"
                 style={{
                     position: "absolute",

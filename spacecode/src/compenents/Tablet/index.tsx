@@ -82,7 +82,7 @@ export default class Tablet extends React.Component<Props, State> {
 
     onChange = (newValue: string | undefined) => {
 
-        if (newValue == undefined) {
+        if (newValue === undefined) {
             return
         }
 
@@ -128,9 +128,9 @@ export default class Tablet extends React.Component<Props, State> {
                     <div>
                         <div className="code-zone">
                             <div className="menu-code-zone">
-                                <button><span>Doc</span> <img src="/assets/docIcon.svg" /></button>
-                                <button><span>Aide</span><img src="/assets/aideIcon.svg" /></button>
-                                <button><span>Réinisialiser</span> <img src="/assets/reinisialiserIcon.svg" /></button>
+                                <button><span>Doc</span> <img src="/assets/docIcon.svg" alt="document" /></button>
+                                <button><span>Aide</span><img src="/assets/aideIcon.svg" alt="aide" /></button>
+                                <button><span>Réinisialiser</span> <img src="/assets/reinisialiserIcon.svg" alt="reset" /></button>
                             </div>
                             <div className="editor-container">
                                 <Editor

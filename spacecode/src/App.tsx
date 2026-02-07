@@ -8,7 +8,7 @@ import Exo1 from "./pages/Exo1"
 import Animation from './pages/Animation';
 import Base from './pages/Base';
 
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   

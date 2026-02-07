@@ -27,7 +27,7 @@ export default class Obite extends React.Component<Props, State> {
         const left = this.props.xpos! - dim2
         const top = this.props.ypos! - dim2
         return (
-            <svg style={{top:top,left:left}} width={dim2*2} height={dim2*2} viewBox={`0 0 ${dim2*2} ${dim2*2}`} xmlns="http://www.w3.org/2000/svg" className="orbite">
+            <svg style={{top:top,left:left}} width={dim2*2} height={dim2*2} viewBox={`0 0 ${dim2*2} ${dim2*2}`} className="orbite">
                 <circle
                     cx={dim2}
                     cy={dim2}
@@ -35,7 +35,7 @@ export default class Obite extends React.Component<Props, State> {
                     fill="none"
                     stroke="white"
                     strokeOpacity="1"
-                    stroke-width={0.5}
+                    strokeWidth={1}
                 />
             </svg>
         )   
