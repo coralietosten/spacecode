@@ -6,40 +6,38 @@ import "./styles.css";
 
 type State = {}
 type Props = {
-    xpos? : number
-    ypos? : number
-    scale? : number
+    xpos?: number
+    ypos?: number
+    scale?: number
 }
 
 export default class Obite extends React.Component<Props, State> {
 
     static defaultProps = {
-        xpos : 0,
-        ypos : 0,
-        scale : 1
+        xpos: 0,
+        ypos: 0,
+        scale: 1
     }
 
-    private imgRef = React.createRef<HTMLImageElement>();
+    render() {
 
-    public getDom(): HTMLImageElement | null {
-        return this.imgRef.current;
-    }
+        let dim = 100*(this.props.scale || 1)
+        let dim2 = dim + 1
 
-    render(){
-        return(
-            <img
-                ref={this.imgRef}
-                className="star"
-                src="/assets/orbite.svg"
-                alt=""
-                style={{
-                    position: "absolute",
-                    transform: `
-                        translate(${this.props.xpos}px, ${this.props.ypos}px)
-                        scale(${this.props.scale})
-                    `,
-                    }}
-            />
-        )
+        const left = this.props.xpos! - dim2
+        const top = this.props.ypos! - dim2
+        return (
+            <svg style={{top:top,left:left}} width={dim2*2} height={dim2*2} viewBox={`0 0 ${dim2*2} ${dim2*2}`} xmlns="http://www.w3.org/2000/svg" className="orbite">
+                <circle
+                    cx={dim2}
+                    cy={dim2}
+                    r={dim}
+                    fill="none"
+                    stroke="white"
+                    strokeOpacity="1"
+                    stroke-width={0.5}
+                />
+            </svg>
+        )   
     }
 }
