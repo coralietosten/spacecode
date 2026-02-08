@@ -1,6 +1,8 @@
 /*get utilisateur by ID */
-SELECT * FROM Utilisateur 
-WHERE Id_utilisateur = 1 ;
+SELECT * FROM Utilisateur ;
+--WHERE Id_utilisateur = 1 ;
+
+SELECT * FROM Exercices_termines;
 
 /* recupérer l'exercice suivant d'un exercice */
 SELECT Id_exercice_suivant FROM Exercice_suivant
@@ -36,6 +38,8 @@ WHERE Id_utilisateur == 1 AND Indices.Id_exercice == 1;
 SELECT * FROM Indices
 ORDER BY Id_exercice, Ordre;
 
+
+/* on ne peut pas ajouter un indice utilisé si l'exercice n'est pas dispo pour l'utilisateur ou terminé */
 
 
 

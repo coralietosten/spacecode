@@ -1,11 +1,12 @@
--- DROP TABLE Utilisateur;
--- DROP TABLE Niveau;
--- DROP TABLE Indices;
--- DROP TABLE Exercices_termines;
--- DROP TABLE Exercices;
--- DROP TABLE Exercice_suivant;
--- DROP TABLE Cours;
--- DROP TABLE Indices_utilises; 
+/*DROP TABLE Exercices_termines;
+DROP TABLE Exercice_suivant;
+DROP TABLE Indices_utilises;  
+DROP TABLE Indices;
+DROP TABLE Exercices;
+DROP TABLE Utilisateur;
+DROP TABLE Niveau;
+DROP TABLE Cours; */
+
 
 CREATE TABLE IF NOT EXISTS Cours
 (
@@ -19,8 +20,8 @@ CREATE TABLE IF NOT EXISTS Exercice_suivant
   Id_exercice         INTEGER NOT NULL,
   Id_exercice_suivant INTEGER NULL    ,
   PRIMARY KEY (Id_exercice, Id_exercice_suivant),
-  FOREIGN KEY (Id_exercice) REFERENCES Exercices (Id_exercice),
-  FOREIGN KEY (Id_exercice_suivant) REFERENCES Exercices (Id_exercice)
+  FOREIGN KEY (Id_exercice) REFERENCES Exercices (Id_exercice) ON DELETE CASCADE ,
+  FOREIGN KEY (Id_exercice_suivant) REFERENCES Exercices (Id_exercice) ON DELETE CASCADE 
 );
 
 CREATE TABLE IF NOT EXISTS Exercices
@@ -32,7 +33,7 @@ CREATE TABLE IF NOT EXISTS Exercices
   Code_solution VARCHAR NULL    ,
   Id_niveau     INTEGER NOT NULL,
   PRIMARY KEY (Id_exercice),
-  FOREIGN KEY (Id_niveau) REFERENCES Niveau (Id_niveau)
+  FOREIGN KEY (Id_niveau) REFERENCES Niveau (Id_niveau) ON DELETE CASCADE 
 );
 
 CREATE TABLE IF NOT EXISTS Exercices_termines
@@ -40,8 +41,8 @@ CREATE TABLE IF NOT EXISTS Exercices_termines
   Id_utilisateur INTEGER NOT NULL,
   Id_exercice    INTEGER NOT NULL,
   PRIMARY KEY (Id_utilisateur, Id_exercice),
-  FOREIGN KEY (Id_utilisateur) REFERENCES Utilisateur (Id_utilisateur),
-  FOREIGN KEY (Id_exercice) REFERENCES Exercices (Id_exercice)
+  FOREIGN KEY (Id_utilisateur) REFERENCES Utilisateur (Id_utilisateur) ON DELETE CASCADE ,
+  FOREIGN KEY (Id_exercice) REFERENCES Exercices (Id_exercice) ON DELETE CASCADE 
 );
 
 
@@ -51,8 +52,8 @@ CREATE TABLE IF NOT EXISTS Indices
   Id_exercice INTEGER NOT NULL,
   Instruction VARCHAR NULL    ,
   Ordre       INT     NULL    ,
-  PRIMARY KEY (Id_indice),
-  FOREIGN KEY (Id_exercice) REFERENCES Exercices (Id_exercice)
+  PRIMARY KEY (Id_indice), 
+  FOREIGN KEY (Id_exercice) REFERENCES Exercices (Id_exercice) ON DELETE CASCADE 
 );
 
 CREATE TABLE IF NOT EXISTS Indices_utilises
@@ -60,8 +61,9 @@ CREATE TABLE IF NOT EXISTS Indices_utilises
 	Id_utilisateur INTEGER NOT NULL,
 	Id_indice INTEGER NOT NULL,
 	PRIMARY KEY (Id_utilisateur, Id_indice),
-	FOREIGN KEY (Id_utilisateur ) REFERENCES Utilisateur (Id_utilisateur),
-	FOREIGN KEY (Id_indice) REFERENCES Indices (Id_indice)
+	FOREIGN KEY (Id_utilisateur ) REFERENCES Utilisateur (Id_utilisateur) ON DELETE CASCADE ,
+	FOREIGN KEY (Id_indice) REFERENCES Indices (Id_indice) ON DELETE CASCADE 
+
 );
 
 CREATE TABLE IF NOT EXISTS Niveau
@@ -71,14 +73,14 @@ CREATE TABLE IF NOT EXISTS Niveau
   Nom_etoile VARCHAR NULL    ,
   Id_cours   INTEGER NOT NULL,
   PRIMARY KEY (Id_niveau),
-  FOREIGN KEY (Id_cours) REFERENCES Cours (Id_cours)
+  FOREIGN KEY (Id_cours) REFERENCES Cours (Id_cours) ON DELETE CASCADE 
 );
 
 CREATE TABLE IF NOT EXISTS Utilisateur
 (
   Id_utilisateur INTEGER NOT NULL,
   Nom            VARCHAR NULL    ,
-  Mdp				  VARCHAR NULL, 
+  Mdp				  VARCHAR NOT NULL, 
   Prenom         VARCHAR NULL    ,
   Photo          VARCHAR NULL    ,
   Email          VARCHAR NOT NULL UNIQUE ,
@@ -114,10 +116,10 @@ INSERT INTO Exercice_suivant (Id_exercice, Id_exercice_suivant) VALUES
 (3, 4);
 
 
-INSERT INTO Utilisateur (Id_utilisateur, Nom, Prenom, Photo, Email) VALUES
-(1, 'Dupont', 'Jean', 'jean.png', 'jean.dupont@email.com'),
-(2, 'Martin', 'Claire', 'claire.png', 'claire.martin@email.com'),
-(3, 'Durand', 'Paul', NULL, 'paul.durand@email.com');
+INSERT INTO Utilisateur (Id_utilisateur, Nom, Prenom, Mdp, Photo, Email) VALUES
+(1, 'Dupont', 'Jean', '123map', 'jean.png', 'jean.dupont@email.com'),
+(2, 'Martin', 'Claire','123map', 'claire.png', 'claire.martin@email.com'),
+(3, 'Durand', 'Paul','123map', NULL, 'paul.durand@email.com');
 
 
 INSERT INTO Exercices_termines (Id_utilisateur, Id_exercice) VALUES
@@ -142,6 +144,13 @@ INSERT INTO Indices_utilises (Id_utilisateur, Id_indice) VALUES
 (1, 1),
 (1, 3),
 (2, 4);
+
+PRAGMA foreign_keys=ON;
+
+
+--DELETE FROM Utilisateur WHERE Id_utilisateur = 1;
+
+
 
 
 

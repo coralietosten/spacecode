@@ -38,7 +38,6 @@ const db = new sqlite3.Database(dbPath, sqlite3.OPEN_CREATE | sqlite3.OPEN_READW
     });
     console.log(needCreate);
     if (needCreate){
-        const sql = fs.readFileSync(sqlPath, "utf8");
         createDb();
     }
 });
@@ -76,8 +75,8 @@ module.exports.utilisateur = {
     byId : id  => get(`SELECT * FROM Utilisateur WHERE Id_utilisateur =${id}`),
     byEmail : email => get(`SELECT * FROM Utilisateur WHERE email = ${email}`),
     newUtilisateur : (user) => new Promise((resolve, reject) => {
-        const {Nom, Prenom, Mdp, Photo, Email}= user;
-        db.run(`INSERT INTO Utilisateur (Nom, Prenom, Mdp, Photo, Email) VALUES (?,?,?,?,?)`, [Nom, Prenom, Mdp, Photo, Email], function(err) {
+        const {nom, prenom, email, password} = user;
+        db.run(`INSERT INTO Utilisateur (Nom, Prenom, Email, Mdp) VALUES (?,?,?,?)`, [nom, prenom, email, password], function(err) {
             if (err){
                 reject(err);
             }
@@ -97,8 +96,8 @@ module.exports.utilisateur = {
         });
     }),
     update : (id_utilisateur, utilisateur) => new Promise((resolve, reject)=>{
-        const {Nom, Prenom, Mdp, Photo, Email} = utilisateur;
-        db.run(`UPDATE Utilisateur SET Nom= ?, Prenom = ?, Mdp = ?, Photo = ?, Email = ? WHERE Id_utilisateur = ?` , [Nom , Prenom, Mdp, Photo, Email, id_utilisateur], function(err) {
+        const {nom, prenom, mdp, photo, email} = utilisateur;
+        db.run(`UPDATE Utilisateur SET Nom= ?, Prenom = ?, Mdp = ?, Photo = ?, Email = ? WHERE Id_utilisateur = ?` , [nom , prenom, mdp, photo, email, id_utilisateur], function(err) {
             if(err){
                 reject(err);
             }
@@ -111,10 +110,15 @@ module.exports.utilisateur = {
 
 module.exports.exercices = {
     all : () => all('SELECT * FROM Exercices'),
-    byCours : Id_cours => get(`SELECT * FROM Exercices JOIN Cours ON Cours.Id_exercice = Exercice.Id_exercice WHERE Id_cours =${Id_cours}`),
-    byNiveau : Id_niveau => get(`SELECT * FROM Exercices JOIN Niveau ON Niveau.Id_exercice = Exercice.Id_exercice WHERE Id_niveau = ${Id_niveau}`),
+    byCours : Id_cours => all(`SELECT * FROM Exercices JOIN Niveau ON Niveau.Id_niveau = Exercices.Id_niveau JOIN Cours ON Cours.Id_cours = Niveau.Id_cours WHERE Cours.Id_cours = ${Id_cours}`),
+    byNiveau : Id_niveau => all(`SELECT * FROM Exercices WHERE Id_niveau = ${Id_niveau}`),
     byId : Id_exercice => get(`SELECT * FROM Exercices WHERE Id_exercice = ${Id_exercice}`),
-    exoTemrine : Id_utilisateur => all(`SELECT * FROM Exercices_termines WHERE Id_utilisateur = ${Id_utilisateur}`),
+    exoTermine : Id_utilisateur => all(`SELECT * FROM Exercices_termines WHERE Id_utilisateur = ${Id_utilisateur}`),
+    exoSuivant : Id_exercice => all(`SELECT Id_exercice_suivant FROM Exercice_suivant WHERE Id_exercice = ${Id_exercice}`),
+    exoDisponible : Id_utilisateur => all(`SELECT Id_exercice_suivant AS exercices_debloques FROM Exercice_suivant
+                                           JOIN Exercices_termines ON Exercices_termines.Id_exercice == Exercice_suivant.Id_exercice
+                                            WHERE Exercices_termines.Id_utilisateur == ${Id_utilisateur} AND Exercice_suivant.Id_exercice_suivant NOT IN (
+                                            SELECT Id_exercice FROM Exercices_termines WHERE Id_utilisateur == ${Id_utilisateur})`),
     newExercice : (exercice ) => new Promise((resolve, reject) =>{
         const {Nom, Instruction, Code_exercice, Code_solution, Id_niveau} = exercice;
         db.run(`INSERT INTO Exercices (Nom, Instruction, Code_exercice, Code_solution, Id_niveau) VALUES (?,?,?,?,?)` , [Nom, Instruction, Code_exercice, Code_solution, Id_niveau], function (err) {
@@ -126,12 +130,24 @@ module.exports.exercices = {
             }
         });
     }),
+    newExerciceTermine : (exercice_termine) => new Promise((resolve, reject) =>{
+        const {id_exercice, id_utilisateur} = exercice_termine;
+        db.run(`INSERT INTO Exercices_termines (Id_exercice, Id_utilisateur) VALUES (?,?)` , [id_exercice, id_utilisateur], function (err) {
+            if (err) {
+                reject (err);
+            }
+            else{
+                resolve(exercice_termine);
+            }
+        });
+    }),
 };
 
 module.exports.indices = {
+    all : () => all('SELECT * FROM Indices'),
     byId : (Id_indice) => get(`SELECT * FROM Indices WHERE Id_indice = ${Id_indice}`),
     byExo : Id_exercice => all(`SELECT * FROM Indices WHERE Id_exercice = ${Id_exercice}`),
-    indicesUtiliseByExo : Id_utilisateur => all(`SELECT * FROM Indices_utilises JOIN Indices ON Indices.Id_indice = Indices_utilises.Id_indice WHERE Id_utilisateur = ${Id_utilisateur}`),
+    indicesUtiliseByUser : Id_utilisateur => all(`SELECT * FROM Indices_utilises JOIN Indices ON Indices.Id_indice = Indices_utilises.Id_indice WHERE Id_utilisateur = ${Id_utilisateur}`),
     newIndice : (indice) => new Promise((resolve, reject) => {
         const {Id_exercice, Instruction, Ordre} = indice;
         db.run(`INSERT INTO Indices (Id_exercice, Instruction, Ordre) VALUES (?,?,?)`, [Id_exercice, Instruction, Ordre], function(err) {
@@ -143,6 +159,18 @@ module.exports.indices = {
             }
         });
     }),
+    newIndiceUtilise : (indice) => new Promise((resolve, reject) => {
+        const {id_utilisateur, id_indice} = indice;
+        db.run(`INSERT INTO Indices_utilises (Id_utilisateur, Id_indice) VALUES (?,?)`, [id_utilisateur, id_indice], function(err) {
+            if (err){
+                reject(err);
+            }
+            else{
+                resolve(indice);
+            }
+        });
+    }),
+
 };
 
 module.exports.cours = {
