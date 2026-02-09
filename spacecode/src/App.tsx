@@ -8,6 +8,7 @@ import Exo1 from "./pages/Exo1"
 import Animation from './pages/Animation';
 import Base from './pages/Base';
 import HTML from './pages/HTML';
+import Myexo from './pages/Myexo';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -24,6 +25,7 @@ function App() {
         <Route path="/anim" element={<Animation/>} />
         <Route path="/base" element={<Base/>} />
         <Route path="/HTML" element={<HTML/>} />
+        <Route path="/myexo" element={<Myexo/>} />
 
       </Routes>
 

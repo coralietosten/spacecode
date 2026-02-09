@@ -4,6 +4,7 @@
     justify-content: space-between;
     background-image: url("./backgroundTablet.svg");
     background-repeat: repeat;
+    z-index: 1;
 }
 
 .tablet-content{

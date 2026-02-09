@@ -69,10 +69,11 @@ export default class PlanetarySystem extends React.Component<Props, State> {
             }
         });
         }
-        
     }
 
     render() {
+        this.planetesDOM= []
+        
         return (
                 <div className="planetary-system" style={{ top: this.centery, left: this.centerx }}>
                     <Star />
