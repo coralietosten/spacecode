@@ -29,7 +29,7 @@ type Props = {
     solutionCode: any[];
 };
 
-export default class Tablet extends React.Component<Props, State> {
+export default class Templat extends React.Component<Props, State> {
 
     solutionCode: Balise[];
 
@@ -119,9 +119,9 @@ export default class Tablet extends React.Component<Props, State> {
 
     render() {
         return (
-            <div className="tablet">
+            <div className="templat">
                 <TabletEdge value={this.state.nbcomplet} />
-                <div className="tablet-content">
+                <div className="templat-content">
                     <div>
                         <h1>{this.props.instructionTitre}</h1>
                         <p>{this.props.instructionText}</p>
@@ -131,12 +131,12 @@ export default class Tablet extends React.Component<Props, State> {
                             <div className="menu-code-zone">
                                 <button><span>Doc</span> <img src="/assets/docIcon.svg" /></button>
                                 <button><span>Aide</span><img src="/assets/aideIcon.svg" /></button>
-                                <button><span>Réinisialiser</span> <img src="/assets/reinisialiserIcon.svg" /></button>
+                                <button><span>Réinitialiser</span> <img src="/assets/reinitialiserIcon.svg" /></button>
                             </div>
                             <div className="editor-container">
                                 <Editor
                                     height="500px"
-                                    width="500px"
+                                    width="600px"
                                     language="html"
                                     theme="vs-dark"
                                     value={this.state.codeAffiche}

@@ -2,7 +2,7 @@ import React from "react";
 
 import "./styles.css";
 
-import Tablet from "../../compenents/Tablet";
+import Templat from "../../compenents/Templat";
 import data from "../../compenents/DataBase.json";
 
 
@@ -28,7 +28,7 @@ export default class Exo1 extends React.Component<Props, State> {
     render(){
         return(
             <main>
-                <Tablet
+                <Templat
                     instructionTitre={this.instructionTitre}
                     instructionText={this.instructionText}
                     defaultCode={this.defaultCode}

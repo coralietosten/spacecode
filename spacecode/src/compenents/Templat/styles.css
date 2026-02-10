@@ -1,4 +1,4 @@
-.tablet{
+.templat{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -6,7 +6,7 @@
     background-repeat: repeat;
 }
 
-.tablet-content{
+.templat-content{
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -17,7 +17,7 @@
 
 }
 
-.tablet-content > div:first-child{
+.templat-content > div:first-child{
     color: var(--white);
 
 
@@ -28,18 +28,18 @@
 
 }
 
-.tablet-content > div:last-child{
+.templat-content > div:last-child{
     display: flex;
     flex-direction: row;
     gap: 10px;
 }
 
-.tablet-content > div:last-child > div{
+.templat-content > div:last-child > div{
     width: 100%;
 }
 
 .code-zone{
-    max-width: 500px;
+    max-width: 600px;
 }
 
 .menu-code-zone{
