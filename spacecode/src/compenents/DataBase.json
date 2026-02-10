@@ -1,0 +1,100 @@
+{
+    "exercices": [
+        {
+            "id": 1,
+            "instructionTitre": "Niveau 1",
+            "instructionText": "Vous devez corriger le programme",
+            "defaultCode": [
+                {
+                    "balise": "div",
+                    "attributs": {},
+                    "autoClose": false,
+                    "text" : "",
+                    "contenus": [
+                        {
+                            "balise":"p",
+                            "attributs":{},
+                            "autoClose":false,
+                            "text":"Je suis un paragraphe dans une div",
+                            "contenus":[]
+                        },
+                        {
+                            "balise":"p",
+                            "attributs":{},
+                            "autoClose":false,
+                            "text":"Je suis un paragraphe dans une div",
+                            "contenus":[]
+                        },
+                        {
+                            "balise": "div",
+                            "attributs": {},
+                            "autoClose": false,
+                            "text" : "",
+                            "contenus": [
+                                {
+                                    "balise":"p",
+                                    "attributs":{},
+                                    "autoClose":false,
+                                    "text":"Je suis un paragraphe dans une div",
+                                    "contenus":[]
+                                },
+                                {
+                                    "balise":"p",
+                                    "attributs":{},
+                                    "autoClose":false,
+                                    "text":"Je suis un paragraphe dans une div",
+                                    "contenus":[]
+                                }
+                            ]
+                        }       
+                        
+                    ]
+                },
+                {
+                    "balise": "h1",
+                    "attributs": {},
+                    "autoClose": false,
+                    "text" : "Mon premier code HTML",
+                    "contenus": []
+                },
+                {
+                    "balise": "p",
+                    "attributs": {},
+                    "autoClose": false,
+                    "text" : "Ceci est mon premier code HTML.",
+                    "contenus": []
+                }
+            ],
+            "solutionCode": [
+                {
+                    "balise": "AnyThing",
+                    "attributs": {},
+                    "autoClose": false,
+                    "text" : "",
+                    "contenus": []
+                },
+                {
+                    "balise": "h1",
+                    "attributs": {},
+                    "autoClose": false,
+                    "text" : "Mon premier code HTML",
+                    "contenus": []
+                },
+                {
+                    "balise": "p",
+                    "attributs": {},
+                    "autoClose": false,
+                    "text" : "Ceci est mon premier code HTML.",
+                    "contenus": []
+                },
+                {
+                    "balise": "AnyThing",
+                    "attributs": {},
+                    "autoClose": false,
+                    "text" : "",
+                    "contenus": []
+                }
+            ]
+        }
+    ]
+}

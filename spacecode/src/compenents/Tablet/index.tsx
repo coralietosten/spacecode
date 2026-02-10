@@ -8,6 +8,10 @@ import TabletEdge from "../TabletEdge"
 import Editor from '@monaco-editor/react';
 import DOMPurify from 'dompurify';
 
+import JsonToObject from "../CodeStructure/JsonToObject";
+import CodeVefif from "../CodeStructure/CodeVerif";
+import Balise from "../CodeStructure/Balise";
+
 declare global {// to del
     interface Window {
         _blinkInterval?: NodeJS.Timeout;
@@ -21,19 +25,26 @@ type State = {
 type Props = {
     instructionTitre: string;
     instructionText: string;
-    defaultCode: string;
-    solutionCode: string[];
+    defaultCode: any;
+    solutionCode: any[];
 };
 
 export default class Tablet extends React.Component<Props, State> {
+
+    solutionCode: Balise[];
+
+    codeVefif: CodeVefif;
 
     constructor(props: Props) {
         super(props)
 
         this.state = {
-            codeAffiche: props.defaultCode,
+            codeAffiche: JsonToObject.parse(JSON.stringify(props.defaultCode))?.map(balise => balise.getCode()).join('\n') || '',
             nbcomplet: 0
         }
+
+        this.solutionCode = JsonToObject.parse(JSON.stringify(props.solutionCode));
+        this.codeVefif = new CodeVefif(this.solutionCode);
     }
 
 
@@ -63,21 +74,7 @@ export default class Tablet extends React.Component<Props, State> {
 
     verifyExoCompletion = (html: string) => {
 
-        let i = 0;
-
-        for (let solution of this.props.solutionCode) {
-
-
-            i = this.skipSpaces(html, i);
-
-            if (!this.match(html, i, solution)) {
-                return false;
-            }
-
-            i += solution.length;
-        }
-
-        return true;
+        return this.codeVefif.verifyCode(html);
     };
 
     onChange = (newValue: string | undefined) => {
@@ -108,6 +105,10 @@ export default class Tablet extends React.Component<Props, State> {
             console.log('Structure incorrecte');
             if (window._blinkInterval) {
                 clearInterval(window._blinkInterval);
+                const display = document.querySelector(".result-zone") as HTMLElement;
+                if (display !== null) {
+                    display.style.color ='';
+                }
                 window._blinkInterval = undefined;
             }
         }

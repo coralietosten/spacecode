@@ -3,6 +3,7 @@ import React from "react";
 import "./styles.css";
 
 import Tablet from "../../compenents/Tablet";
+import data from "../../compenents/DataBase.json";
 
 
 type State = {}
@@ -12,19 +13,16 @@ export default class Exo1 extends React.Component<Props, State> {
 
     instructionTitre: string;
     instructionText: string;
-    defaultCode: string;
-    solutionCode: string[];
+    defaultCode: any;
+    solutionCode: any[];
 
     constructor(props: Props){
+
         super(props);
-        this.instructionTitre = "Niveau 1";
-        this.instructionText = "vous devez corriger le programme";
-        this.defaultCode = 
-`
-<h1>Bonjour le monde !<>
-<p>Ceci est mon premier code HTML.</p>
-`;
-        this.solutionCode = ["<h1>Bonjour le monde !</h1>", "<p>Ceci est mon premier code HTML.</p>"];
+        this.instructionTitre = data.exercices[0].instructionTitre;
+        this.instructionText = data.exercices[0].instructionText;
+        this.defaultCode = data.exercices[0].defaultCode;
+        this.solutionCode = data.exercices[0].solutionCode;
     }
 
     render(){
