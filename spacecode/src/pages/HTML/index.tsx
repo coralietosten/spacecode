@@ -53,14 +53,17 @@ export default class HTML extends React.Component<Props, State> {
             id: "starScroll",
             target : window,
             type : "wheel",
+            debounce: true,
+            tolerance: 20,
             onChange : (self) => {
-                // console.log(self.deltaY, self.velocityY)
+                console.log(self.deltaY, self.velocityY)
                 if (self.deltaY < 0 &&index_star_data+1 < this.starsData.length){
                     index_star_data++
-                }else if(self.deltaY > 0 && index_star_data-1 > 0){
+                }else if(self.deltaY > 0 && index_star_data > 0){
                     index_star_data--
                 }
                 
+                console.log(index_star_data)
 
                 for (const index_star in this.starpossRef){
                     if (this.starpossRef[index_star] === null){
