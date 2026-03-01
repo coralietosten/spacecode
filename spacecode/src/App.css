@@ -64,3 +64,8 @@ button img{
 h1,p{
   margin: 0;
 }
+
+@font-face{
+  font-family: 'AllertaStencil';
+  src: url("font/AllertaStencil-Regular.ttf"); 
+}

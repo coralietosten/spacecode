@@ -1,0 +1,22 @@
+.portail{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    text-decoration: none;
+
+}
+
+.portail > img{
+    width: 100px;
+}
+
+.portail > span{
+    font-family: "AllertaStencil";
+    color: var(--white);
+    filter : drop-shadow(0 0 5px var(--white));
+    text-shadow: 0 0 1px var(--black);
+}
