@@ -48,14 +48,19 @@ export default class HTML extends React.Component<Props, State> {
     componentDidMount(): void {
 
         gsap.registerPlugin(Observer)
-        let campy = 0
+        let index_star_data = 0
         Observer.create({
             id: "starScroll",
             target : window,
             type : "wheel",
             onChange : (self) => {
                 // console.log(self.deltaY, self.velocityY)
-                campy += self.deltaY*0.5
+                if (self.deltaY < 0 &&index_star_data+1 < this.starsData.length){
+                    index_star_data++
+                }else if(self.deltaY > 0 && index_star_data-1 > 0){
+                    index_star_data--
+                }
+                
 
                 for (const index_star in this.starpossRef){
                     if (this.starpossRef[index_star] === null){
@@ -63,7 +68,10 @@ export default class HTML extends React.Component<Props, State> {
                     }
 
                     gsap.to(this.starpossRef[index_star],{
-                        y : campy+this.starsData[index_star].y,
+                        y : this.starsData[index_star].y - this.starsData[index_star_data].y + this.centery,
+                        x : this.starsData[index_star].x - this.starsData[index_star_data].x  + this.centerx,
+                        xPercent:-50,
+                        yPercent:-50,
                         ease: "power3.inOut",
                         duration : 0.3
                     })
