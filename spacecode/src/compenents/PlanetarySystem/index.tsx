@@ -12,6 +12,7 @@ import gsap from "gsap";
 type State = {}
 type Props = {
     nbplanet : number
+    scale? : number
 }
 
 interface PlanetData{
@@ -28,6 +29,8 @@ export default class PlanetarySystem extends React.Component<Props, State> {
     planetes : PlanetData[]
     planetesDOM : (SVGSVGElement|null)[] = []
 
+    planetary_system_ref = React.createRef<HTMLDivElement>();
+
     constructor(props : Props){
         super(props)
         
@@ -43,6 +46,13 @@ export default class PlanetarySystem extends React.Component<Props, State> {
                 startangle : Math.random() * Math.PI * 2
             })
         }
+
+
+
+    }
+
+    public getDom(): HTMLDivElement | null {
+        return this.planetary_system_ref.current;
     }
 
     componentDidMount() {
@@ -70,12 +80,24 @@ export default class PlanetarySystem extends React.Component<Props, State> {
         });
         }
     }
+    
+    static defaultProps = {
+        scale: 1
+    }
 
     render() {
         this.planetesDOM= []
         
         return (
-                <div className="planetary-system" style={{ top: this.centery, left: this.centerx }}>
+                <div className="planetary-system" //style={{ top: this.centery, left: this.centerx }}
+                style={{
+                    position: "absolute",
+                    transform:  `
+                        translate(${this.centerx}px, ${this.centery}px)
+                        scale(${this.props.scale},${this.props.scale})
+                    `,
+                }}
+                ref={this.planetary_system_ref}>
                     <Star />
 
                     {
