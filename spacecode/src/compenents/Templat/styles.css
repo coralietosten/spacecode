@@ -2,8 +2,10 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-image: url("./backgroundTablet.svg");
+    /* background-image: url("./backgroundTablet.svg"); */
+    background-image: url("./Rectangle179.png");
     background-repeat: repeat;
+    z-index: 1;
 }
 
 .templat-content{

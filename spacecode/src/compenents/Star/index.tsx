@@ -10,6 +10,7 @@ type Props = {
     ypos? : number
     rotate? : number
     scale? : number
+    onClick? : () => void  
 }
 
 export default class Star extends React.Component<Props, State> {
@@ -31,6 +32,7 @@ export default class Star extends React.Component<Props, State> {
     render(){
         return(
             <img
+                onClick={this.props.onClick}
                 ref={this.imgRef}
                 className="star"
                 src="/assets/starOn.svg"
@@ -39,6 +41,7 @@ export default class Star extends React.Component<Props, State> {
                     position: "absolute",
                     transform: `
                         translate(${this.props.xpos}px, ${this.props.ypos}px)
+                        translate(-50%, -50%)
                         rotate(${this.props.rotate}deg)
                         scale(${this.props.scale})
                     `,
