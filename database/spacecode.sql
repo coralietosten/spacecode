@@ -1,11 +1,9 @@
-/*DROP TABLE Exercices_termines;
-DROP TABLE Exercice_suivant;
-DROP TABLE Indices_utilises;  
+/*DROP TABLE Niveaux_termines; 
 DROP TABLE Indices;
 DROP TABLE Exercices;
 DROP TABLE Utilisateur;
 DROP TABLE Niveau;
-DROP TABLE Cours; */
+DROP TABLE Cours;  */
 
 
 CREATE TABLE IF NOT EXISTS Cours
@@ -15,14 +13,7 @@ CREATE TABLE IF NOT EXISTS Cours
   PRIMARY KEY (Id_cours)
 );
 
-CREATE TABLE IF NOT EXISTS Exercice_suivant
-(
-  Id_exercice         INTEGER NOT NULL,
-  Id_exercice_suivant INTEGER NULL    ,
-  PRIMARY KEY (Id_exercice, Id_exercice_suivant),
-  FOREIGN KEY (Id_exercice) REFERENCES Exercices (Id_exercice) ON DELETE CASCADE ,
-  FOREIGN KEY (Id_exercice_suivant) REFERENCES Exercices (Id_exercice) ON DELETE CASCADE 
-);
+
 
 CREATE TABLE IF NOT EXISTS Exercices
 (
@@ -36,13 +27,13 @@ CREATE TABLE IF NOT EXISTS Exercices
   FOREIGN KEY (Id_niveau) REFERENCES Niveau (Id_niveau) ON DELETE CASCADE 
 );
 
-CREATE TABLE IF NOT EXISTS Exercices_termines
+CREATE TABLE IF NOT EXISTS Niveaux_termines
 (
   Id_utilisateur INTEGER NOT NULL,
-  Id_exercice    INTEGER NOT NULL,
-  PRIMARY KEY (Id_utilisateur, Id_exercice),
+  Id_niveau   INTEGER NOT NULL,
+  PRIMARY KEY (Id_utilisateur, Id_niveau),
   FOREIGN KEY (Id_utilisateur) REFERENCES Utilisateur (Id_utilisateur) ON DELETE CASCADE ,
-  FOREIGN KEY (Id_exercice) REFERENCES Exercices (Id_exercice) ON DELETE CASCADE 
+  FOREIGN KEY (Id_niveau) REFERENCES Niveau (Id_Niveau) ON DELETE CASCADE 
 );
 
 
@@ -56,15 +47,6 @@ CREATE TABLE IF NOT EXISTS Indices
   FOREIGN KEY (Id_exercice) REFERENCES Exercices (Id_exercice) ON DELETE CASCADE 
 );
 
-CREATE TABLE IF NOT EXISTS Indices_utilises
-(
-	Id_utilisateur INTEGER NOT NULL,
-	Id_indice INTEGER NOT NULL,
-	PRIMARY KEY (Id_utilisateur, Id_indice),
-	FOREIGN KEY (Id_utilisateur ) REFERENCES Utilisateur (Id_utilisateur) ON DELETE CASCADE ,
-	FOREIGN KEY (Id_indice) REFERENCES Indices (Id_indice) ON DELETE CASCADE 
-
-);
 
 CREATE TABLE IF NOT EXISTS Niveau
 (
@@ -80,7 +62,7 @@ CREATE TABLE IF NOT EXISTS Utilisateur
 (
   Id_utilisateur INTEGER NOT NULL,
   Nom            VARCHAR NULL    ,
-  Mdp				  VARCHAR NOT NULL, 
+  Mdp				  VARCHAR NULL    , 
   Prenom         VARCHAR NULL    ,
   Photo          VARCHAR NULL    ,
   Email          VARCHAR NOT NULL UNIQUE ,
@@ -109,27 +91,10 @@ INSERT INTO Exercices (Id_exercice, Nom, Instruction, Code_exercice, Code_soluti
 (5, 'Python print', 'Afficher Hello World', 'print()', 'print("Hello World")', 4);
 
 
-INSERT INTO Exercice_suivant (Id_exercice, Id_exercice_suivant) VALUES
-(1, 2),
-(1, 5),
-(2, 3),
-(3, 4);
-
-
 INSERT INTO Utilisateur (Id_utilisateur, Nom, Prenom, Mdp, Photo, Email) VALUES
 (1, 'Dupont', 'Jean', '123map', 'jean.png', 'jean.dupont@email.com'),
 (2, 'Martin', 'Claire','123map', 'claire.png', 'claire.martin@email.com'),
 (3, 'Durand', 'Paul','123map', NULL, 'paul.durand@email.com');
-
-
-INSERT INTO Exercices_termines (Id_utilisateur, Id_exercice) VALUES
-(1, 1),
-(1, 2),
-(1, 5),
-(2, 1),
-(2, 2),
-(2, 3),
-(3, 1);
 
 
 INSERT INTO Indices (Id_indice, Id_exercice, Instruction, Ordre) VALUES
@@ -139,16 +104,11 @@ INSERT INTO Indices (Id_indice, Id_exercice, Instruction, Ordre) VALUES
 (4, 3, 'Utilise JOIN ... ON', 1),
 (5, 4, 'Une sous-requête est nécessaire', 1);
 
-
-INSERT INTO Indices_utilises (Id_utilisateur, Id_indice) VALUES
-(1, 1),
-(1, 3),
-(2, 4);
-
 PRAGMA foreign_keys=ON;
 
 
 --DELETE FROM Utilisateur WHERE Id_utilisateur = 1;
+
 
 
 
