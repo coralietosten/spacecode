@@ -6,6 +6,7 @@ import Star from "../../compenents/Star";
 import gsap from "gsap";
 import { Observer } from "gsap/Observer";
 import PlanetarySystem from "../../compenents/PlanetarySystem";
+import Tablet from "../../compenents/Tablet";
 
 type State = {
     load: number | null
@@ -57,7 +58,6 @@ export default class HTML extends React.Component<Props, State> {
     }
 
     componentDidMount(): void {
-        console.log("ici")
 
         gsap.registerPlugin(Observer)
         Observer.getById("starScroll")?.kill()
@@ -124,7 +124,6 @@ export default class HTML extends React.Component<Props, State> {
 
         console.log("clique");
         this.setState({ load: index_star })
-        // window.location.href = "/myexo"
     }
 
     render() {
@@ -149,7 +148,7 @@ export default class HTML extends React.Component<Props, State> {
         const planetary_system = (this.state.load == null) ? null :
             <div>
                 <PlanetarySystem nbplanet={this.state.load} scale={0} ref={(el) => void (this.planetary_system = el?.getDom() ?? null)} />
-                {/* <Exo1 /> */}
+                <Tablet />
             </div>
 
         return (

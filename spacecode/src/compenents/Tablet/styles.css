@@ -1,9 +1,18 @@
 .tablet{
+    position: relative;
+
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
     /* background-image: url("./backgroundTablet.svg"); */
     background-image: url("./backgroundTablet.png");
     background-repeat: repeat;
     z-index: 1;
+
+    height: 709px;
+
+    justify-self: center;
+
+    width: 0%;
+    overflow: hidden;
+
+    justify-content: center;
 }

@@ -9,6 +9,9 @@ import Templat from "../Templat";
 
 import data from "../../compenents/DataBase.json";
 
+import gsap from "gsap";
+
+
 type State = {
     nbcomplet: number
 }
@@ -43,6 +46,16 @@ export default class Tablet extends React.Component<Props, State> {
         //TODO next exercice
     }
 
+    componentDidMount(): void {
+        const template = document.querySelector(".tablet")
+
+        gsap.to(template,{
+            width:"100%",
+            ease: "power3.inOut",
+            duration: 1.5
+        })
+    }
+
     render() {
         return (
             <div className="tablet">
@@ -55,7 +68,7 @@ export default class Tablet extends React.Component<Props, State> {
 
                     onValidation ={() => this.nextExercice()}
                 />
-                <TabletEdge value={this.state.nbcomplet} rotate={180} />
+                <TabletEdge value={this.state.nbcomplet} right={true} />
 
             </div >
         )
