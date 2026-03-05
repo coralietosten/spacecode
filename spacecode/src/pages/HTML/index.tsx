@@ -6,7 +6,6 @@ import Star from "../../compenents/Star";
 import gsap from "gsap";
 import { Observer } from "gsap/Observer";
 import PlanetarySystem from "../../compenents/PlanetarySystem";
-import Exo1 from "../Exo1";
 
 type State = {
     load: number | null
@@ -100,7 +99,7 @@ export default class HTML extends React.Component<Props, State> {
 
 
     componentDidUpdate(prevProps: Props, prevState: State) {
-        if (this.state.load != null && this.state.load != prevState.load && this.planetary_system) {
+        if (this.state.load !== null && this.state.load !== prevState.load && this.planetary_system) {
 
             gsap.to(this.planetary_system, {
                 scale: 1,
@@ -132,7 +131,7 @@ export default class HTML extends React.Component<Props, State> {
 
         this.starpossRef = []
 
-        const stars = (this.state.stars == false) ? null :
+        const stars = (this.state.stars === false) ? null :
             this.starsData.map((elem, index) => (
                 <Star
                     key={index}

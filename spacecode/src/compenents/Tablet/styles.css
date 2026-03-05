@@ -1,0 +1,9 @@
+.tablet{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* background-image: url("./backgroundTablet.svg"); */
+    background-image: url("./backgroundTablet.png");
+    background-repeat: repeat;
+    z-index: 1;
+}
