@@ -7,3 +7,22 @@
     color: white;
     border: 1px solid var(--white);
 }
+
+.connection_menu{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    top: 50%;
+    left: 50%;
+}
+
+
+.connection_menu .button{
+    font-size: 48px;
+}
+
+.connection_menu .secondary_button{
+    font-size: 36px;
+}

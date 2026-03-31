@@ -76,7 +76,7 @@ export default class Home extends React.Component<Props, State> {
             
 
             <main>
-                <div>
+                <div className="connection_menu">
                     <button className="button">Se connecter</button>
                     <button className="secondary_button">Crée un compte</button>
                 </div>
