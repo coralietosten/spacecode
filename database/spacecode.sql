@@ -3,7 +3,7 @@ DROP TABLE Indices;
 DROP TABLE Exercices;
 DROP TABLE Utilisateur;
 DROP TABLE Niveau;
-DROP TABLE Cours;  */
+DROP TABLE Cours; */
 
 
 CREATE TABLE IF NOT EXISTS Cours
@@ -71,19 +71,19 @@ CREATE TABLE IF NOT EXISTS Utilisateur
 
 
 
-INSERT INTO Cours (Id_cours, Nom) VALUES
+INSERT OR IGNORE INTO Cours (Id_cours, Nom) VALUES
 (1, 'Programmation SQL'),
 (2, 'Programmation Python');
 
 
-INSERT INTO Niveau (Id_niveau, Nom, Nom_etoile, Id_cours) VALUES
+INSERT OR IGNORE INTO Niveau (Id_niveau, Nom, Nom_etoile, Id_cours) VALUES
 (1, 'Débutant', 'Bronze', 1),
 (2, 'Intermédiaire', 'Argent', 1),
 (3, 'Avancé', 'Or', 1),
 (4, 'Débutant', 'Bronze', 2);
 
 
-INSERT INTO Exercices (Id_exercice, Nom, Instruction, Code_exercice, Code_solution, Id_niveau) VALUES
+INSERT OR IGNORE INTO Exercices (Id_exercice, Nom, Instruction, Code_exercice, Code_solution, Id_niveau) VALUES
 (1, 'SELECT simple', 'Sélectionner tous les utilisateurs', 'SELECT * FROM Utilisateur;', 'SELECT * FROM Utilisateur;', 1),
 (2, 'WHERE simple', 'Sélectionner les utilisateurs nommés Dupont', 'SELECT * FROM Utilisateur WHERE Nom = ?;', 'SELECT * FROM Utilisateur WHERE Nom = ''Dupont'';', 1),
 (3, 'JOIN simple', 'Afficher les niveaux avec leur cours', 'SELECT ...', 'SELECT n.Nom, c.Nom FROM Niveau n JOIN Cours c ON n.Id_cours = c.Id_cours;', 2),
@@ -91,13 +91,13 @@ INSERT INTO Exercices (Id_exercice, Nom, Instruction, Code_exercice, Code_soluti
 (5, 'Python print', 'Afficher Hello World', 'print()', 'print("Hello World")', 4);
 
 
-INSERT INTO Utilisateur (Id_utilisateur, Nom, Prenom, Mdp, Photo, Email) VALUES
+INSERT OR IGNORE INTO Utilisateur (Id_utilisateur, Nom, Prenom, Mdp, Photo, Email) VALUES
 (1, 'Dupont', 'Jean', '123map', 'jean.png', 'jean.dupont@email.com'),
 (2, 'Martin', 'Claire','123map', 'claire.png', 'claire.martin@email.com'),
 (3, 'Durand', 'Paul','123map', NULL, 'paul.durand@email.com');
 
 
-INSERT INTO Indices (Id_indice, Id_exercice, Instruction, Ordre) VALUES
+INSERT OR IGNORE INTO Indices (Id_indice, Id_exercice, Instruction, Ordre) VALUES
 (1, 1, 'Utilise SELECT *', 1),
 (2, 2, 'Ajoute une clause WHERE', 1),
 (3, 2, 'Attention aux guillemets', 2),

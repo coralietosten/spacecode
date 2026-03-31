@@ -12,7 +12,6 @@ const ExerciceDAO = {
         console.log(data);
         
         const exercices = data.map((exercice: any) => new ExerciceModel(exercice));
-        console.log('coucou');
 
         return exercices;
     }, 

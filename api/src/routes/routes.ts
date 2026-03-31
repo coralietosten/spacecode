@@ -10,7 +10,7 @@ const userDAO = require('../DAO/UserDAO.ts');
 const ExerciceDAO = require('../DAO/ExerciceDAO.ts');
 const IndiceDAO = require('../DAO/IndiceDAO.ts');
 
-const UtilisateurModel = require ('../model/UtilisateurModel')
+const UtilisateurModel = require ('../model/UtilisateurModel');
 
 
 module.exports = () => {
