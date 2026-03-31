@@ -49,12 +49,17 @@ export default class Tablet extends React.Component<Props, State> {
     componentDidMount(): void {
         const template = document.querySelector(".tablet")
 
-        gsap.to(template,{
-            width:"100%",
+        gsap.fromTo(template,
+        { width: "0px" },
+        { 
+            width: "100%",
+            duration: 1.5,
             ease: "power3.inOut",
-            duration: 1.5
-        })
+            clearProps: "width"
+        }
+        );
     }
+
 
     render() {
         return (

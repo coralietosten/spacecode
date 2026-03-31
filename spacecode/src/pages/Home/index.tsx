@@ -42,6 +42,10 @@ export default class Home extends React.Component<Props, State> {
         })
     }
 
+    connectionButton() {
+        window.location.href = "introduction";
+    }
+
     render() {
 
         let elemlist : any = [];
@@ -70,6 +74,7 @@ export default class Home extends React.Component<Props, State> {
             nbplanet={Math.round(Math.random()*2)}
             />)
         })
+
             
         return (
 
@@ -77,7 +82,7 @@ export default class Home extends React.Component<Props, State> {
 
             <main>
                 <div className="connection_menu">
-                    <button className="button">Se connecter</button>
+                    <button className="button" onClick={()=>this.connectionButton()}>Se connecter</button>
                     <button className="secondary_button">Crée un compte</button>
                 </div>
                 <div>
