@@ -13,6 +13,8 @@ type State = {}
 type Props = {
     nbplanet : number
     scale? : number
+    xpos? : number
+    ypos? : number
 }
 
 interface PlanetData{
@@ -34,8 +36,13 @@ export default class PlanetarySystem extends React.Component<Props, State> {
     constructor(props : Props){
         super(props)
         
-        this.centerx = window.innerWidth/2
-        this.centery = window.innerHeight/2
+        if (this.props.xpos && this.props.ypos){
+            this.centerx = this.props.xpos
+            this.centery = this.props.ypos
+        }else{
+            this.centerx = window.innerWidth/2
+            this.centery = window.innerHeight/2
+        }
 
         this.planetes = []
         for ( let  i = 0; i< this.props.nbplanet ; i++){

@@ -68,7 +68,6 @@ export default class HTML extends React.Component<Props, State> {
             target: window,
             type: "wheel",
             debounce: true,
-            tolerance: 20,
             onChange: (self) => {
                 console.log(self.deltaY, self.velocityY)
                 if (self.deltaY < 0 && index_star_data + 1 < this.starsData.length) {
@@ -159,3 +158,5 @@ export default class HTML extends React.Component<Props, State> {
         )
     }
 }
+
+

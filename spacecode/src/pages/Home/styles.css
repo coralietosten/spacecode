@@ -1,0 +1,9 @@
+.button{
+    color: var(--background-pages);
+    background: var(--white);
+}
+
+.secondary_button{
+    color: white;
+    border: 1px solid var(--white);
+}
