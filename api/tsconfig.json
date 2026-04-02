@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "outDir": "dist",
+        "noEmitOnError": true,
+        "strict": true,
+        "declaration": true,
+        "rootDir": "src",
+        "module": "node18",
+        "esModuleInterop": true,
+        "moduleResolution": "nodenext",
+        "sourceMap": true
+    },
+}
