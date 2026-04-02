@@ -1,5 +1,13 @@
-body{
-  background-color: var(--background-pages);
+
+
+.introduction .top_message_box{
+  position: absolute;
+  top: 8%;
+  left: 50%;
+  transform: translate(-50%,-50%);
   overflow: hidden;
-  /* position: absolute; */
+
+  display: flex;
+  justify-content: center;
 }
+
