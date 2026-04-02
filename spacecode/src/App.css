@@ -10,6 +10,7 @@
   --blue_t : rgba(13, 5, 255, 0.25); /* 30% */
 
   --green : #00C832;
+  --red : #D80000;
 }
 
 
@@ -43,7 +44,7 @@ main{
 } */
 
 button{
-  padding: .2em 1em;
+  padding: .2em 2em;
   background: var(--background-pages);
   border: 1px solid var(--black);
   border-radius: 90px;
@@ -54,6 +55,29 @@ button{
   gap: 5px;
   align-items: center;
   justify-content: center;
+}
+
+.button{
+    color: var(--background-pages);
+    background: var(--white);
+}
+
+.cancel_button{
+  background: none;
+  border: 1px solid var(--red);
+  color: red;
+
+}
+
+.secondary_button{
+    color: white;
+    border: 1px solid var(--white);
+}
+
+.transparent_button{
+    color: white;
+    background: none;
+    border: 1px solid var(--white);
 }
 
 button img{
@@ -69,3 +93,59 @@ h1,p{
   font-family: 'AllertaStencil';
   src: url("font/AllertaStencil-Regular.ttf"); 
 }
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+    transition: background-color 0s 600000s, color 0s 600000s !important;
+}
+
+
+/* ///form */
+
+.form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 20px;
+}
+
+.form .form_button {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+.form .form_button > button:first-child{
+    font-size: 24px;
+}
+
+.form .form_button > button:last-child{
+    font-size: 12px;
+}
+
+.form .top_message{
+    color: var(--white);
+    border: 1px solid var(--white);
+    background-color: var(--blue_t);
+    
+    font-size: 15px;
+
+    border-radius: 18px;
+    padding: 1em 2em;
+
+    max-width: 601px;
+}
+
+/* ///end form */

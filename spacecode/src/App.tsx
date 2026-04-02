@@ -13,6 +13,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Tablet from './compenents/Tablet';
 import Introduction from './pages/Introduction';
 import Connection from './pages/Connection';
+import Register from './pages/Register';
 
 function App() {
   
@@ -24,6 +25,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/introduction" element={<Introduction />} />
         <Route path="/connection" element={<Connection />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/exercice" element={<Exercices />} />
         <Route path="/exercice/1" element={<Tablet/>} />
         <Route path="/anim" element={<Animation/>} />

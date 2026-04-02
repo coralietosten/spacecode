@@ -43,7 +43,11 @@ export default class Home extends React.Component<Props, State> {
     }
 
     connectionButton() {
-        window.location.href = "introduction";
+        window.location.href = "connection";
+    }
+
+    registerButton() {
+        window.location.href = "register";
     }
 
     render() {
@@ -83,7 +87,7 @@ export default class Home extends React.Component<Props, State> {
             <main>
                 <div className="connection_menu">
                     <button className="button" onClick={()=>this.connectionButton()}>Se connecter</button>
-                    <button className="secondary_button">Crée un compte</button>
+                    <button className="secondary_button" onClick={()=>this.registerButton()}>Crée un compte</button>
                 </div>
                 <div>
                     {

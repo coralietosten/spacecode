@@ -5,26 +5,47 @@ import "./styles.css";
 
 import Star from "../../compenents/Star";
 
-import gsap from "gsap";
 import SmallScreen from "../../compenents/SmallScreen";
-import FormLogin from "../../compenents/FormLogin";
-import FormRegister from "../../compenents/FormRegister";
-import Form from "../../compenents/Form";
+import InputText from "../../compenents/inputText";
+import { useNavigate } from "react-router-dom";
 
 
+type Props = {
+};
 
 
-export default class Connection extends React.Component {
+export default function Connection(props: Props) {
 
-  render() {
+  const [email, setemail] = React.useState("");
+  const [password, setpassword] = React.useState("");
+
+  const navigate = useNavigate();
 
 
-    return (
-      <SmallScreen>
-        <Form>
-          <FormLogin/>
-        </Form>
-      </SmallScreen>
-    );
-  }
+  const cancel_button = () => {
+      navigate(-1);
+  };
+
+  const valid_button = () => {
+      navigate("/base");
+  };
+
+  return (
+    <SmallScreen>
+      <div className="form">
+
+        <div>
+          <InputText name="email" id="email" value={email} setvalue={setemail}/>
+          <InputText name="mots de passe" id="password" value={password} setvalue={setpassword} />
+        </div>
+        <div className="form_button">
+          <button className="transparent_button" onClick={valid_button}>Valider</button>
+          <button className="cancel_button" onClick={cancel_button}>
+            Retour
+          </button>
+        </div>
+      </div>
+
+    </SmallScreen>
+  );
 }
