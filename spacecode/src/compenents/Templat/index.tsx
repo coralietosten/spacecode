@@ -11,6 +11,7 @@ import DOMPurify from 'dompurify';
 import JsonToObject from "../CodeStructure/JsonToObject";
 import CodeVefif from "../CodeStructure/CodeVerif";
 import Balise from "../CodeStructure/Balise";
+import TextToObject from "../CodeStructure/TextToObject";
 
 declare global {// to del
     interface Window {
@@ -55,23 +56,6 @@ export default class Templat extends React.Component<Props, State> {
         }
     }
 
-
-
-    ///
-
-    skipSpaces = (html: string, i: number): number => {
-        while (i < html.length && /\s/.test(html[i])) i++;
-        return i;
-    };
-
-    match = (html: string, i: number, str: string): boolean => {
-        i = this.skipSpaces(html, i);
-        if (html.startsWith(str, i)) {
-            return true;
-        }
-        return false;
-    };
-
     verifyExoCompletion = (html: string) => {
 
         return this.codeVefif.verifyCode(html);
@@ -101,21 +85,25 @@ export default class Templat extends React.Component<Props, State> {
                     blink = !blink;
                 }, 200);
             }
-        } else {
-            console.log('Structure incorrecte');
-            if (window._blinkInterval) {
-                clearInterval(window._blinkInterval);
-                const display = document.querySelector(".result-zone") as HTMLElement;
-                if (display !== null) {
-                    display.style.color ='';
-                }
-                window._blinkInterval = undefined;
+        } else if (! TextToObject.parse(newValue).isValid) {
+            console.log('Code HTML invalide');
+            clearInterval(window._blinkInterval);
+            const display = document.querySelector(".result-zone") as HTMLElement;
+            if (display !== null) {
+                display.style.color ='#c90300';
             }
+            window._blinkInterval = undefined;
+            
+        }else {
+            console.log('Structure incorrecte');
+            clearInterval(window._blinkInterval);
+            const display = document.querySelector(".result-zone") as HTMLElement;
+            if (display !== null) {
+                display.style.color ='#ffd000';
+            }
+            window._blinkInterval = undefined;
         }
     };
-
-
-    ///
 
     render() {
         return (
