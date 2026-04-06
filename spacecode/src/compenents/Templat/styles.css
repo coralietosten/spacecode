@@ -64,3 +64,15 @@
     /* filter:drop-shadow(0 0 20px var(--grey_lime)); */
     box-shadow: 0 0 20px var(--grey_lime);
 }
+
+.green{
+    color:green;
+}
+
+.red{
+    color:red;
+}
+
+    .orange{
+    color:orange;
+}

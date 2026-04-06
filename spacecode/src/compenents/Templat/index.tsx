@@ -21,6 +21,7 @@ declare global {// to del
 
 type State = {
     codeAffiche: string
+    codeResultat: string
     nbcomplet: number
 }
 type Props = {
@@ -41,6 +42,7 @@ export default class Templat extends React.Component<Props, State> {
 
         this.state = {
             codeAffiche: JsonToObject.parse(JSON.stringify(props.defaultCode))?.map(balise => balise.getCode()).join('\n') || '',
+            codeResultat: '',
             nbcomplet: 0
         }
 
@@ -56,10 +58,10 @@ export default class Templat extends React.Component<Props, State> {
         }
     }
 
-    verifyExoCompletion = (html: string) => {
+    // verifyExoCompletion = (html: string) => {
 
-        return this.codeVefif.verifyCode(html);
-    };
+    //     return this.codeVefif.verifyCode(html);
+    // };
 
     onChange = (newValue: string | undefined) => {
 
@@ -67,42 +69,58 @@ export default class Templat extends React.Component<Props, State> {
             return
         }
 
-        this.setState({ codeAffiche: newValue });
+        const resultColorCode = this.codeVefif.colorCode(newValue);
 
-        if (this.verifyExoCompletion(newValue)) {
-
-            console.log('Table with tr found');
-
-            const display = document.querySelector(".result-zone") as HTMLElement;
-            console.log(display)
-            if (display !== null) {
-                let blink = true;
-                if (window._blinkInterval) {
-                    clearInterval(window._blinkInterval);
-                }
-                window._blinkInterval = setInterval(() => {
-                    display.style.color = blink ? '#90EE90' : '';
-                    blink = !blink;
-                }, 200);
-            }
-        } else if (! TextToObject.parse(newValue).isValid) {
+        if (! resultColorCode.structureIsValid) {
+            this.setState({ codeResultat: newValue });
             console.log('Code HTML invalide');
             clearInterval(window._blinkInterval);
+            window._blinkInterval = undefined;
             const display = document.querySelector(".result-zone") as HTMLElement;
             if (display !== null) {
                 display.style.color ='#c90300';
             }
-            window._blinkInterval = undefined;
-            
         }else {
-            console.log('Structure incorrecte');
-            clearInterval(window._blinkInterval);
-            const display = document.querySelector(".result-zone") as HTMLElement;
-            if (display !== null) {
-                display.style.color ='#ffd000';
-            }
-            window._blinkInterval = undefined;
+            this.setState({ codeResultat: resultColorCode.code });
+            // console.log(this.state.codeResultat);
         }
+
+        // this.setState({ codeAffiche: newValue }); // todo
+
+        // if (this.verifyExoCompletion(newValue)) {
+
+        //     console.log('Table with tr found');
+
+        //     const display = document.querySelector(".result-zone") as HTMLElement;
+        //     console.log(display)
+        //     if (display !== null) {
+        //         let blink = true;
+        //         if (window._blinkInterval) {
+        //             clearInterval(window._blinkInterval);
+        //         }
+        //         window._blinkInterval = setInterval(() => {
+        //             display.style.color = blink ? '#90EE90' : '';
+        //             blink = !blink;
+        //         }, 200);
+        //     }
+        // } else if (! TextToObject.parse(newValue).isValid) {
+        //     console.log('Code HTML invalide');
+        //     clearInterval(window._blinkInterval);
+        //     const display = document.querySelector(".result-zone") as HTMLElement;
+        //     if (display !== null) {
+        //         display.style.color ='#c90300';
+        //     }
+        //     window._blinkInterval = undefined;
+            
+        // }else {
+        //     console.log('Structure incorrecte');
+        //     clearInterval(window._blinkInterval);
+        //     const display = document.querySelector(".result-zone") as HTMLElement;
+        //     if (display !== null) {
+        //         display.style.color ='#ffd000';
+        //     }
+        //     window._blinkInterval = undefined;
+        // }
     };
 
     render() {
@@ -142,7 +160,7 @@ export default class Templat extends React.Component<Props, State> {
                         </div>
 
 
-                        <div className="result-zone" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(this.state.codeAffiche) }} />
+                        <div className="result-zone" dangerouslySetInnerHTML={{ __html: this.state.codeResultat }} />
 
                     </div>
                 </div>
