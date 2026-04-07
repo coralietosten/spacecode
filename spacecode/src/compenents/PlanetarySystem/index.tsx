@@ -101,6 +101,8 @@ export default class PlanetarySystem extends React.Component<Props, State> {
             <div className="planetary-system" //style={{ top: this.centery, left: this.centerx }}
                 style={{
                     position: "absolute",
+                    top: 0,
+                    left: 0,
                     transform: `
                         translate(${this.centerx}px, ${this.centery}px)
                         scale(${this.props.scale},${this.props.scale})

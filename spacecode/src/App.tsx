@@ -35,10 +35,6 @@ function App() {
 
       </Routes>
 
-      <footer>
-          <h3><a href="/"> Retour a l'acceuil</a></h3>
-      </footer>
-
     </BrowserRouter>
     
   );

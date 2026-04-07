@@ -6,7 +6,7 @@ import "./styles.css";
 import Star from "../../compenents/Star";
 import PlanetarySystem from "../../compenents/PlanetarySystem";
 
-import gsap from "gsap";
+import gsap, { random } from "gsap";
 
 
 
@@ -47,6 +47,7 @@ export default class Introduction extends React.Component {
 
   componentDidMount(): void {
     const planetarySystem = document.querySelector(".introduction .planetary-system")
+    const planetarySystembase = document.querySelector(".introduction .planetary-system:last-child")
 
     const top_message = document.querySelector(".introduction .top_message_box")
 
@@ -95,12 +96,12 @@ export default class Introduction extends React.Component {
         duration: 3,
       }, "<")
 
-      .to(null, {
-        duration: 1
-      })
 
+
+    
+    const liveStar = Math.round(Math.random() * 100)
     this.starpossRef.forEach((star, i) => {
-      if (star == null) {
+      if (star == null || i == liveStar) {
         return
       }
 
@@ -108,7 +109,7 @@ export default class Introduction extends React.Component {
         x: "+=5",
         yoyo: true,
         repeat: 3,
-        duration: 0.05,
+        duration: 0.02,
         onUpdate: () => {
 
           star.classList.add("starOff");
@@ -135,8 +136,57 @@ export default class Introduction extends React.Component {
             });
           }
         }
-      }, "+=0.05")
+      }, "+=0.02")
     })
+
+    const starref = this.starpossRef[liveStar]
+    const stardata = this.starsDatas[liveStar]
+
+    const cordoanteAfterzoomX = (x : number) => {
+      return (x - (this.width / 2)) * -0.9 + x
+    }
+
+    const cordoanteAfterzoomY = (y : number) => {
+      return (y - (this.height / 2)) * -0.9 + y
+    }
+
+    tl.to(this.starpossRef, {
+      x: (i: number) => cordoanteAfterzoomX(this.starsDatas[i].x) - cordoanteAfterzoomX(stardata.x) + this.width/2,// (this.starsDatas[i].x - (this.width / 2)) * 1 + this.starsDatas[i].x,
+      y: (i: number) => cordoanteAfterzoomY(this.starsDatas[i].y) - cordoanteAfterzoomY(stardata.y) + this.height/2,// (this.starsDatas[i].y - (this.height / 2)) * 1 + this.starsDatas[i].y,
+      // scale: (i: number) => 1,
+      duration: 2,
+    },"+=1")
+    .to(starref,{
+      rotate:0,
+      duration:2,
+    },"<")
+
+    const cordoanteAfterTranslationX = (x : number) => {
+      return cordoanteAfterzoomX(x) - cordoanteAfterzoomX(stardata.x) + this.width/2
+    }
+
+    const cordoanteAfterTranslationY = (y : number) => {
+      return cordoanteAfterzoomY(y) - cordoanteAfterzoomY(stardata.y) + this.height/2
+    }
+
+
+    tl.to(this.starpossRef, {
+      x: (i: number) => (cordoanteAfterTranslationX(this.starsDatas[i].x) - (this.width / 2)) * 100 + cordoanteAfterTranslationX(this.starsDatas[i].x),
+      y: (i: number) => (cordoanteAfterTranslationY(this.starsDatas[i].y) - (this.height / 2)) * 100 + cordoanteAfterTranslationY(this.starsDatas[i].y),
+      scale: (i: number) => 1,
+      duration: 3,
+      ease: "power3.inOut",
+    })
+    .fromTo(planetarySystembase,{
+      scale : 0
+    },{
+      scale : 1,
+      duration : 3,
+      onComplete: ()=>{
+        window.location.href = "/base"
+      }
+    },"<") // faire venire tout les élément de la base petit a petit
+    
 
   }
 
@@ -170,7 +220,9 @@ export default class Introduction extends React.Component {
             ))
           }
         </div>
-
+        <PlanetarySystem
+          nbplanet={4}
+        />
       </div>
     );
   }

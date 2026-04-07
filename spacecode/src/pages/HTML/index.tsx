@@ -142,18 +142,22 @@ export default class HTML extends React.Component<Props, State> {
                 />
             ))
 
+        
+        let planetary_system = null
+        let tablet = null
 
-
-        const planetary_system = (this.state.load == null) ? null :
-            <div>
-                <PlanetarySystem nbplanet={this.state.load} scale={0} ref={(el) => void (this.planetary_system = el?.getDom() ?? null)} />
-                <Tablet />
-            </div>
+        if (this.state.load != null) {
+            planetary_system = <PlanetarySystem nbplanet={this.state.load} scale={0} ref={(el) => void (this.planetary_system = el?.getDom() ?? null)} />
+            tablet = <Tablet />
+        }
+            
+                
 
         return (
-            <main>
+            <main className="HTML">
                 {stars}
                 {planetary_system}
+                {tablet}
             </main>
         )
     }
