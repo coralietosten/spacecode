@@ -71,33 +71,149 @@ CREATE TABLE IF NOT EXISTS Utilisateur
 
 
 
-INSERT INTO Cours (Id_cours, Nom) VALUES
+INSERT OR IGNORE INTO Cours (Id_cours, Nom) VALUES
 (1, 'Programmation SQL'),
 (2, 'Programmation Python');
 
 
-INSERT INTO Niveau (Id_niveau, Nom, Nom_etoile, Id_cours) VALUES
+INSERT OR IGNORE INTO Niveau (Id_niveau, Nom, Nom_etoile, Id_cours) VALUES
 (1, 'Débutant', 'Bronze', 1),
 (2, 'Intermédiaire', 'Argent', 1),
 (3, 'Avancé', 'Or', 1),
 (4, 'Débutant', 'Bronze', 2);
 
 
-INSERT INTO Exercices (Id_exercice, Nom, Instruction, Code_exercice, Code_solution, Id_niveau) VALUES
-(1, 'SELECT simple', 'Sélectionner tous les utilisateurs', 'SELECT * FROM Utilisateur;', 'SELECT * FROM Utilisateur;', 1),
+INSERT OR IGNORE INTO Exercices (Id_exercice, Nom, Instruction, Code_exercice, Code_solution, Id_niveau) VALUES
+(1, 'Balises titres', 'Remplacer des balises <p> par des balises <h1>, <h2>, <h3>, <h4>, <h5>, ou <h6>.', 
+'[    
+                {
+                    "balise": "p",
+                    "attributs": {},
+                    "autoClose": false,
+                    "text" : "Briefing de Mission",
+                    "contenus": []
+                },
+                {
+                    "balise": "p",
+                    "attributs": {},
+                    "autoClose": false,
+                    "text" : "Mission Principale",
+                    "contenus": []
+                },
+                {
+                    "balise": "p",
+                    "attributs": {},
+                    "autoClose": false,
+                    "text" : "Bienvenue dans cette mission de la plus haute importance. Si vous reussissez, vous pourrez rejoindre \"les sauveurs d’étoiles.\"",
+                    "contenus": []
+                },
+                {
+                    "balise": "p",
+                    "attributs": {},
+                    "autoClose": false,
+                    "text" : "Objectifs",
+                    "contenus": []
+                },
+                {
+                    "balise": "p",
+                    "attributs": {},
+                    "autoClose": false,
+                    "text" : "Objectif principal",
+                    "contenus": []
+                },
+                {
+                    "balise": "p",
+                    "attributs": {},
+                    "autoClose": false,
+                    "text" : "Rallumer toutes les étoiles",
+                    "contenus": []
+                },
+                {
+                    "balise": "p",
+                    "attributs": {},
+                    "autoClose": false,
+                    "text" : "Objectif secondaire",
+                    "contenus": []
+                },
+                {
+                    "balise": "p",
+                    "attributs": {},
+                    "autoClose": false,
+                    "text" : "Comprendre pourquoi toutes les étoiles se sont éteintes",
+                    "contenus": []
+                }
+            ]',
+'[    
+                {
+                    "balise": "h1",
+                    "attributs": {},
+                    "autoClose": false,
+                    "text" : "Briefing de Mission",
+                    "contenus": []
+                },
+                {
+                    "balise": "h2",
+                    "attributs": {},
+                    "autoClose": false,
+                    "text" : "Mission Principale",
+                    "contenus": []
+                },
+                {
+                    "balise": "p",
+                    "attributs": {},
+                    "autoClose": false,
+                    "text" : "Bienvenue dans cette mission de la plus haute importance. Si vous reussissez, vous pourrez rejoindre “les sauveurs d’étoiles."",
+                    "contenus": []
+                },
+                {
+                    "balise": "h3",
+                    "attributs": {},
+                    "autoClose": false,
+                    "text" : "Objectifs",
+                    "contenus": []
+                },
+                {
+                    "balise": "h4",
+                    "attributs": {},
+                    "autoClose": false,
+                    "text" : "Objectif principal",
+                    "contenus": []
+                },
+                {
+                    "balise": "p",
+                    "attributs": {},
+                    "autoClose": false,
+                    "text" : "Rallumer toutes les étoiles",
+                    "contenus": []
+                },
+                {
+                    "balise": "h4",
+                    "attributs": {},
+                    "autoClose": false,
+                    "text" : "Objectif secondaire",
+                    "contenus": []
+                },
+                {
+                    "balise": "p",
+                    "attributs": {},
+                    "autoClose": false,
+                    "text" : "Comprendre pourquoi toutes les étoiles se sont éteintes",
+                    "contenus": []
+                }
+            ]', 1),
 (2, 'WHERE simple', 'Sélectionner les utilisateurs nommés Dupont', 'SELECT * FROM Utilisateur WHERE Nom = ?;', 'SELECT * FROM Utilisateur WHERE Nom = ''Dupont'';', 1),
 (3, 'JOIN simple', 'Afficher les niveaux avec leur cours', 'SELECT ...', 'SELECT n.Nom, c.Nom FROM Niveau n JOIN Cours c ON n.Id_cours = c.Id_cours;', 2),
 (4, 'Sous-requête', 'Lister les exercices terminés par un utilisateur', 'SELECT ...', 'SELECT * FROM Exercices WHERE Id_exercice IN (SELECT Id_exercice FROM Exercices_termines);', 3),
 (5, 'Python print', 'Afficher Hello World', 'print()', 'print("Hello World")', 4);
 
 
-INSERT INTO Utilisateur (Id_utilisateur, Nom, Prenom, Mdp, Photo, Email) VALUES
+INSERT OR IGNORE INTO Utilisateur (Id_utilisateur, Nom, Prenom, Mdp, Photo, Email) VALUES
 (1, 'Dupont', 'Jean', '123map', 'jean.png', 'jean.dupont@email.com'),
 (2, 'Martin', 'Claire','123map', 'claire.png', 'claire.martin@email.com'),
 (3, 'Durand', 'Paul','123map', NULL, 'paul.durand@email.com');
 
 
-INSERT INTO Indices (Id_indice, Id_exercice, Instruction, Ordre) VALUES
+INSERT OR IGNORE INTO Indices (Id_indice, Id_exercice, Instruction, Ordre) VALUES
 (1, 1, 'Utilise SELECT *', 1),
 (2, 2, 'Ajoute une clause WHERE', 1),
 (3, 2, 'Attention aux guillemets', 2),

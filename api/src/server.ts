@@ -2,10 +2,22 @@
 const express = require('express');
 const app = express();
 
+import { initDb } from './utilsDb'
+import cors from "cors";
+
 const api = require('./routes/routes.ts'); 
+
+// Initialisation de la DB
+initDb();
+
+app.use(cors({
+    origin: "http://localhost:3000"
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({extended : false}));
+
+
 
 app.use('/api', api());
 
