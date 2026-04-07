@@ -36,7 +36,7 @@ export default function Connection(props: Props) {
 
         <div>
           <InputText name="email" id="email" value={email} setvalue={setemail}/>
-          <InputText name="mots de passe" id="password" value={password} setvalue={setpassword} />
+          <InputText name="mot de passe" id="password" value={password} setvalue={setpassword} />
         </div>
         <div className="form_button">
           <button className="transparent_button" onClick={valid_button}>Valider</button>

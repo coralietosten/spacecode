@@ -42,8 +42,8 @@ export default function Register(props: Props) {
         <div>
           <InputText name="pseudo" id="pseudo" value={peseudo} setvalue={setpeseudo}/>
           <InputText name="email" id="email" value={email} setvalue={setemail}/>
-          <InputText name="mots de passe" id="password" value={password} setvalue={setpassword}/>
-          <InputText name="confirmation de mots de passe" id="password_confirmation" value={password_confirmation} setvalue={setpassword_confirmation}/>
+          <InputText name="mot de passe" id="password" value={password} setvalue={setpassword}/>
+          <InputText name="confirmation de mot de passe" id="password_confirmation" value={password_confirmation} setvalue={setpassword_confirmation}/>
         </div>
 
         <div className="form_button">
