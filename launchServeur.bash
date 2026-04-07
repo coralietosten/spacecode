@@ -1,13 +1,21 @@
 #!/bin/bash
 
+#lancer depuis la racine (permet de lancer l'api en meme temps)
 git pull
 
-cd spacecode
+npm i
 
-npm i 
-npm run build
+npm start
 
-pm2 restart SpacecodeBuild
+#lancer depuis le dossier spacecode
+# git pull
+
+# cd spacecode
+
+# npm i 
+# npm run build
+
+# pm2 restart SpacecodeBuild
 
 
 # npx pm2 start npm --name "SpacecodeBuild" -- run runBuild
