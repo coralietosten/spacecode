@@ -3,36 +3,52 @@ import React from "react";
 import "./styles.css";
 
 import Templat from "../../compenents/Templat";
-import data from "../../compenents/DataBase.json";
+import datab from "../../compenents/DataBase.json";
+import loadExercice from "../../services/service-api"
 
 
-type State = {}
+type State = {
+    instructionTitre: string,
+    instructionText: string,
+    defaultCode: any[],
+    solutionCode: any[]
+}
 type Props = {}
 
 export default class Exo1 extends React.Component<Props, State> {
-
-    instructionTitre: string;
-    instructionText: string;
-    defaultCode: any;
-    solutionCode: any[];
-
+    
     constructor(props: Props){
-
+        
         super(props);
-        this.instructionTitre = data.exercices[0].instructionTitre;
-        this.instructionText = data.exercices[0].instructionText;
-        this.defaultCode = data.exercices[0].defaultCode;
-        this.solutionCode = data.exercices[0].solutionCode;
+
+        this.state = {
+            instructionTitre: "",
+            instructionText: "",
+            defaultCode: [],
+            solutionCode: []
+        };
     }
+
+    componentDidMount(){
+        loadExercice(1).then(data => {
+            this.setState({
+                instructionTitre: data.nom,
+                instructionText: data.instruction,
+                defaultCode: JSON.parse(data.code_exercice),
+                solutionCode : JSON.parse(data.code_solution)
+            });
+        });
+    }
+
 
     render(){
         return(
             <main>
                 <Templat
-                    instructionTitre={this.instructionTitre}
-                    instructionText={this.instructionText}
-                    defaultCode={this.defaultCode}
-                    solutionCode={this.solutionCode}
+                    instructionTitre={this.state.instructionTitre}
+                    instructionText={this.state.instructionText}
+                    defaultCode={this.state.defaultCode}
+                    solutionCode={this.state.solutionCode}
                 />
             </main>
         )

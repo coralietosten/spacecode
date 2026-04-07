@@ -19,13 +19,13 @@ declare global {// to del
 }
 
 type State = {
-    codeAffiche: string
+    codeAffiche: string;
     nbcomplet: number
 }
 type Props = {
     instructionTitre: string;
     instructionText: string;
-    defaultCode: any;
+    defaultCode: any[];
     solutionCode: any[];
 };
 
