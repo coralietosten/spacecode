@@ -4,7 +4,7 @@ import "./styles.css";
 
 import Templat from "../../compenents/Templat";
 import datab from "../../compenents/DataBase.json";
-import loadExercice from "../../services/service-api"
+import {loadExercice} from "../../services/service-api"
 
 
 type State = {

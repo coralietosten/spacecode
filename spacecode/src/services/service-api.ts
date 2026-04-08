@@ -31,29 +31,18 @@ async function createUtilisateur(nom : string, prenom : string, email: string, m
 
 /////////////exercice/////////////
 
-async function loadExercice(id_exo: number){
+export async function loadExercice(id_exo: number){
     const exerciceResponse = await fetch(API + "/exercice/"+id_exo, { 
         method: "GET"
     });
-    
-    // id : number;
-    // nom : string;
-    // instruction : string;
-    // code_exercice : string;
-    // code_solution : string;
-    // id_niveau : number;
 
     let exercice = await exerciceResponse.json();
-    // console.log(exercice);
     return exercice;
 }
-
-export default loadExercice;
 
 async function loadExercicesByCours(id_cours:number){
     const exercicesResponse = await fetch(API + "/exercices/cours/"+id_cours, { 
         method: "GET",
-        credentials: "include"
     });
     let exercices = await exercicesResponse.json();
     return exercices;
@@ -62,7 +51,6 @@ async function loadExercicesByCours(id_cours:number){
 async function loadExercicesByNiveau(id_niveau:number){
     const exercicesResponse = await fetch(API + "/exercices/cours/"+id_niveau, { 
         method: "GET",
-        credentials: "include"
     });
     let exercices = await exercicesResponse.json();
     return exercices;
@@ -71,7 +59,6 @@ async function loadExercicesByNiveau(id_niveau:number){
 async function loadExercices(){
     const exercicesResponse = await fetch(API + "/exercices", { 
         method: "GET",
-        credentials: "include"
     });
     let exercices = await exercicesResponse.json();
 
@@ -89,28 +76,26 @@ async function loadExercices(){
 /////////////indice/////////////
 
 
-async function loadIndice(id_indice:number){
+export async function loadIndice(id_indice:number){
     const indiceResponse = await fetch(API + "/indice/"+id_indice, { 
         method: "GET",
-        credentials: "include"
     });
     let indice = await indiceResponse.json();
     return indice;
 }
 
-async function loadIndicesByExo(id_exo:number){
+export async function loadIndicesByExo(id_exo:number){
     const indicesResponse = await fetch(API + "/indice/exercice/"+id_exo, { 
         method: "GET",
-        credentials: "include"
     });
     let indices = await indicesResponse.json();
-    return indices;
+    console.log(indices);
+    return indices[0];
 }
 
 async function loadIndices(){
     const indicesResponse = await fetch(API + "/indices", { 
         method: "GET",
-        credentials: "include"
     });
     let indices = await indicesResponse.json();
     return indices;

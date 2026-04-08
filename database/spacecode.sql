@@ -143,64 +143,64 @@ INSERT OR IGNORE INTO Exercices (Id_exercice, Nom, Instruction, Code_exercice, C
                     "contenus": []
                 }
             ]',
-'[    
-                {
-                    "balise": "h1",
-                    "attributs": {},
-                    "autoClose": false,
-                    "text" : "Briefing de Mission",
-                    "contenus": []
-                },
-                {
-                    "balise": "h2",
-                    "attributs": {},
-                    "autoClose": false,
-                    "text" : "Mission Principale",
-                    "contenus": []
-                },
-                {
-                    "balise": "p",
-                    "attributs": {},
-                    "autoClose": false,
-                    "text" : "Bienvenue dans cette mission de la plus haute importance. Si vous reussissez, vous pourrez rejoindre “les sauveurs d’étoiles."",
-                    "contenus": []
-                },
-                {
-                    "balise": "h3",
-                    "attributs": {},
-                    "autoClose": false,
-                    "text" : "Objectifs",
-                    "contenus": []
-                },
-                {
-                    "balise": "h4",
-                    "attributs": {},
-                    "autoClose": false,
-                    "text" : "Objectif principal",
-                    "contenus": []
-                },
-                {
-                    "balise": "p",
-                    "attributs": {},
-                    "autoClose": false,
-                    "text" : "Rallumer toutes les étoiles",
-                    "contenus": []
-                },
-                {
-                    "balise": "h4",
-                    "attributs": {},
-                    "autoClose": false,
-                    "text" : "Objectif secondaire",
-                    "contenus": []
-                },
-                {
-                    "balise": "p",
-                    "attributs": {},
-                    "autoClose": false,
-                    "text" : "Comprendre pourquoi toutes les étoiles se sont éteintes",
-                    "contenus": []
-                }
-            ]', 1),
+'[
+  {
+    "balise": "h1",
+    "attributs": {},
+    "autoClose": false,
+    "text": "Briefing de Mission",
+    "contenus": []
+  },
+  {
+    "balise": "h2",
+    "attributs": {},
+    "autoClose": false,
+    "text": "Mission Principale",
+    "contenus": []
+  },
+  {
+    "balise": "p",
+    "attributs": {},
+    "autoClose": false,
+    "text": "Bienvenue dans cette mission de la plus haute importance. Si vous reussissez, vous pourrez rejoindre \"les sauveurs d’étoiles.\"",
+    "contenus": []
+  },
+  {
+    "balise": "h3",
+    "attributs": {},
+    "autoClose": false,
+    "text": "Objectifs",
+    "contenus": []
+  },
+  {
+    "balise": "h4",
+    "attributs": {},
+    "autoClose": false,
+    "text": "Objectif principal",
+    "contenus": []
+  },
+  {
+    "balise": "p",
+    "attributs": {},
+    "autoClose": false,
+    "text": "Rallumer toutes les étoiles",
+    "contenus": []
+  },
+  {
+    "balise": "h4",
+    "attributs": {},
+    "autoClose": false,
+    "text": "Objectif secondaire",
+    "contenus": []
+  },
+  {
+    "balise": "p",
+    "attributs": {},
+    "autoClose": false,
+    "text": "Comprendre pourquoi toutes les étoiles se sont éteintes",
+    "contenus": []
+  }
+]', 1),
 (2, 'WHERE simple', 'Sélectionner les utilisateurs nommés Dupont', 'SELECT * FROM Utilisateur WHERE Nom = ?;', 'SELECT * FROM Utilisateur WHERE Nom = ''Dupont'';', 1),
 (3, 'JOIN simple', 'Afficher les niveaux avec leur cours', 'SELECT ...', 'SELECT n.Nom, c.Nom FROM Niveau n JOIN Cours c ON n.Id_cours = c.Id_cours;', 2),
 (4, 'Sous-requête', 'Lister les exercices terminés par un utilisateur', 'SELECT ...', 'SELECT * FROM Exercices WHERE Id_exercice IN (SELECT Id_exercice FROM Exercices_termines);', 3),
@@ -214,7 +214,7 @@ INSERT OR IGNORE INTO Utilisateur (Id_utilisateur, Nom, Prenom, Mdp, Photo, Emai
 
 
 INSERT OR IGNORE INTO Indices (Id_indice, Id_exercice, Instruction, Ordre) VALUES
-(1, 1, 'Utilise SELECT *', 1),
+(1, 1, 'Les balises utilisés sont <h1>, <h2>, <h3>, et <h4>', 1),
 (2, 2, 'Ajoute une clause WHERE', 1),
 (3, 2, 'Attention aux guillemets', 2),
 (4, 3, 'Utilise JOIN ... ON', 1),

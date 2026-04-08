@@ -12,6 +12,7 @@ import JsonToObject from "../CodeStructure/JsonToObject";
 import CodeVefif from "../CodeStructure/CodeVerif";
 import Balise from "../CodeStructure/Balise";
 import TextToObject from "../CodeStructure/TextToObject";
+import Indice from "../Indice";
 
 declare global {// to del
     interface Window {
@@ -45,6 +46,8 @@ export default class Templat extends React.Component<Props, State> {
             codeResultat: '',
             nbcomplet: 0
         }
+
+        console.log(this.state.codeAffiche);
 
         this.solutionCode = JsonToObject.parse(JSON.stringify(props.solutionCode));
         this.codeVefif = new CodeVefif(this.solutionCode);
@@ -136,7 +139,7 @@ export default class Templat extends React.Component<Props, State> {
                         <div className="code-zone">
                             <div className="menu-code-zone">
                                 <button><span>Doc</span> <img src="/assets/docIcon.svg" /></button>
-                                <button><span>Aide</span><img src="/assets/aideIcon.svg" /></button>
+                                <Indice/>
                                 <button><span>Réinitialiser</span> <img src="/assets/reinitialiserIcon.svg" /></button>
                             </div>
                             <div className="editor-container">
