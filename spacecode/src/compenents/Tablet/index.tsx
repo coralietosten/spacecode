@@ -16,7 +16,7 @@ type State = {
     nbcomplet: number
 }
 type Props = {
-
+    onCrossClick : () => void
 };
 
 export default class Tablet extends React.Component<Props, State> {
@@ -65,6 +65,7 @@ export default class Tablet extends React.Component<Props, State> {
         return (
             <div className="tablet">
                 <TabletEdge value={this.state.nbcomplet} />
+                <img onClick={() => this.props.onCrossClick()} className="tablet_cross" src="/assets/croix.svg" alt="croix" />
                 <Templat
                     instructionTitre={this.instructionTitre}
                     instructionText={this.instructionText}

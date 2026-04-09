@@ -4,3 +4,10 @@ main.HTML{
     align-items: center;
     justify-content: center;
 }
+
+
+.portal_to_base{
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+}

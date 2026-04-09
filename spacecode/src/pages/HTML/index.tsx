@@ -7,6 +7,7 @@ import gsap from "gsap";
 import { Observer } from "gsap/Observer";
 import PlanetarySystem from "../../compenents/PlanetarySystem";
 import Tablet from "../../compenents/Tablet";
+import Partail from "../../compenents/Portail";
 
 type State = {
     load: number | null
@@ -26,6 +27,8 @@ export default class HTML extends React.Component<Props, State> {
     centerx: number
     centery: number
 
+    index_star_data: number
+
     starsData: StarData[]
     private starpossRef: (HTMLImageElement | null)[] = [];
 
@@ -34,10 +37,14 @@ export default class HTML extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props)
 
+        this.cliqueOnCross = this.cliqueOnCross.bind(this);
+
         this.state = {
             load: null,
             stars: true
         }
+
+        this.index_star_data = 0
 
         this.centerx = window.innerWidth / 2
         this.centery = window.innerHeight / 2
@@ -62,38 +69,43 @@ export default class HTML extends React.Component<Props, State> {
         gsap.registerPlugin(Observer)
         Observer.getById("starScroll")?.kill()
 
-        let index_star_data = 0
         Observer.create({
             id: "starScroll",
             target: window,
             type: "wheel",
             debounce: true,
             onChange: (self) => {
-                console.log(self.deltaY, self.velocityY)
-                if (self.deltaY < 0 && index_star_data + 1 < this.starsData.length) {
-                    index_star_data++
-                } else if (self.deltaY > 0 && index_star_data > 0) {
-                    index_star_data--
-                }
-
-                console.log(index_star_data)
-
-                for (const index_star in this.starpossRef) {
-                    if (this.starpossRef[index_star] === null) {
-                        continue
-                    }
-
-                    gsap.to(this.starpossRef[index_star], {
-                        x: this.starsData[index_star].x - this.starsData[index_star_data].x + this.centerx,
-                        y: this.starsData[index_star].y - this.starsData[index_star_data].y + this.centery,
-                        xPercent: -50,
-                        yPercent: -50,
-                        ease: "power3.inOut",
-                        duration: 0.3
-                    })
-                }
+                this.movestars(self.deltaY, self.velocityY)
             }
         })
+    }
+
+    movestars(deltaY: number = 0, velocityY: number = 0) {
+
+
+        console.log(deltaY, velocityY)
+        if (deltaY < 0 && this.index_star_data + 1 < this.starsData.length) {
+            this.index_star_data++
+        } else if (deltaY > 0 && this.index_star_data > 0) {
+            this.index_star_data--
+        }
+
+        console.log(this.index_star_data)
+
+        for (const index_star in this.starpossRef) {
+            if (this.starpossRef[index_star] === null) {
+                continue
+            }
+
+            gsap.to(this.starpossRef[index_star], {
+                x: this.starsData[index_star].x - this.starsData[this.index_star_data].x + this.centerx,
+                y: this.starsData[index_star].y - this.starsData[this.index_star_data].y + this.centery,
+                xPercent: -50,
+                yPercent: -50,
+                ease: "power3.inOut",
+                duration: 0.3
+            })
+        }
     }
 
 
@@ -106,23 +118,53 @@ export default class HTML extends React.Component<Props, State> {
                 duration: 1.5
             })
 
-            gsap.to(this.starpossRef, {
+            gsap.timeline({}).to(this.starpossRef, {
                 x: (i: number) => ((this.starsData[i].x - this.starsData[this.state.load!].x) * 10 + this.centerx),
                 y: (i: number) => ((this.starsData[i].y - this.starsData[this.state.load!].y) * 10 + this.centery),
                 duration: 1.5,
-                ease: "power3.inOut",
-            }).then(() =>
+                ease: "power3.inOut"
+                
+            })
+            gsap.to(".portal_to_base",{
+                y : "+=100vh",
+                duration: 1.5,
+                ease: "power3.inOut"
+            })
+            .then(() =>
                 this.setState({ stars: false })
             )
+
+
+
+        } else if (this.state.stars == true) {
+            for (const index_star in this.starpossRef) {
+                if (this.starpossRef[index_star] === null) {
+                    continue
+                }
+
+                gsap.set(this.starpossRef[index_star], {
+                    x: this.starsData[index_star].x - this.starsData[this.index_star_data].x + this.centerx,
+                    y: this.starsData[index_star].y - this.starsData[this.index_star_data].y + this.centery,
+                    xPercent: -50,
+                    yPercent: -50,
+                    ease: "power3.inOut",
+                    duration: 0.3
+                })
+            }
+
         }
     }
 
     cliqueOnStar(index_star: number) {
 
-        Observer.getById("starScroll")?.kill()
+        Observer.getById("starScroll")?.disable()
 
-        console.log("clique");
         this.setState({ load: index_star })
+    }
+
+    cliqueOnCross() {
+        this.setState({ load: null, stars: true })
+        Observer.getById("starScroll")?.enable()
     }
 
     render() {
@@ -142,20 +184,24 @@ export default class HTML extends React.Component<Props, State> {
                 />
             ))
 
-        
+
+        const portail = (this.state.stars === false) ? null :
+            <div className="portal_to_base"><Partail nom={"BASE"} href={"/base"} /></div>
+
         let planetary_system = null
         let tablet = null
 
         if (this.state.load != null) {
             planetary_system = <PlanetarySystem nbplanet={this.state.load} scale={0} ref={(el) => void (this.planetary_system = el?.getDom() ?? null)} />
-            tablet = <Tablet />
+            tablet = <Tablet onCrossClick={this.cliqueOnCross} />
         }
-            
-                
+
+
 
         return (
             <main className="HTML">
                 {stars}
+                {portail}
                 {planetary_system}
                 {tablet}
             </main>
