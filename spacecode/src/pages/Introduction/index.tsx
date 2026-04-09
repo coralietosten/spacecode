@@ -25,11 +25,15 @@ export default class Introduction extends React.Component {
   private width: number;
   private height: number;
 
+  private liveStar: number;
+
   constructor(props: {}) {
     super(props);
 
     this.width = window.innerWidth
     this.height = window.innerHeight
+
+    this.liveStar = Math.round(Math.random() * 100)
 
     this.starsDatas = Array.from({ length: 100 }, (s, i) => {
       const angle = Math.random() * 2 * Math.PI
@@ -98,10 +102,9 @@ export default class Introduction extends React.Component {
 
 
 
-    
-    const liveStar = Math.round(Math.random() * 100)
+    console.log("liveStar",this.liveStar)
     this.starpossRef.forEach((star, i) => {
-      if (star == null || i == liveStar) {
+      if (star == null || i == this.liveStar) {
         return
       }
 
@@ -139,8 +142,8 @@ export default class Introduction extends React.Component {
       }, "+=0.02")
     })
 
-    const starref = this.starpossRef[liveStar]
-    const stardata = this.starsDatas[liveStar]
+    const starref = this.starpossRef[this.liveStar]
+    const stardata = this.starsDatas[this.liveStar]
 
     const cordoanteAfterzoomX = (x : number) => {
       return (x - (this.width / 2)) * -0.9 + x
