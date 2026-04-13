@@ -9,6 +9,7 @@ import { requireAuth, AuthRequest } from "../middleware/auth"
 const userDAO = require('../DAO/UserDAO.ts');
 const ExerciceDAO = require('../DAO/ExerciceDAO.ts');
 const IndiceDAO = require('../DAO/IndiceDAO.ts');
+const Niveau_termineDAO = require ('../DAO/Niveau_termineDAO.ts');
 
 const UtilisateurModel = require ('../model/UtilisateurModel')
 
@@ -26,7 +27,7 @@ module.exports = () => {
     //récupération de tous les utilisateurs
     router.get('/utilisateurs', async (req : Request, res : Response)=>{
         try{
-            const utilisateurs = await userDAO.findAll(); //ce n'est pas un format json mais un format 'utilisateur dans la bd' => .json ne marche pas
+            const utilisateurs = await userDAO.findAll(); 
             if (!utilisateurs || utilisateurs.length==0){
                 res.status(200).json({vide:"il n'y a pas d'utilisateurs"});
             }
@@ -42,8 +43,18 @@ module.exports = () => {
 
     //renvoie les informations de l'utilisateur connecté
     router.get('/utilisateur/me', requireAuth, async(req : AuthRequest, res : Response) => {
+        const token = req.cookies.token;
+
+        if (!token) {
+            return res.status(401).json({ erreur : "Utilisateur non authentifié" });
+        }
+
         try{
-            const userId = req.user?.id;
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+            const userId = decoded.id;
+            
+            
             if (!userId) {
                 return res.status(401).json({ erreur: "Utilisateur non authentifié" });
             }
@@ -151,6 +162,13 @@ module.exports = () => {
                     process.env.JWT_SECRET || "secretKey",
                     { expiresIn: "24h" }
                 );
+
+                //stockage dans les cookies
+                res.cookie("token", token, {
+                    httpOnly: true,
+                    secure: true,
+                    sameSite: "none"
+                });
 
                 res.status(200).json({ message: 'Utilisateur "connecté".', token : token });
             }
@@ -383,6 +401,43 @@ module.exports = () => {
             res.status(500).send(err);
         }
     });
+
+
+    //-----------------niveaux terminés--------------------
+
+    //récupération du dernier niveau terminé de l'utilisateur
+    router.get('/dernier_niveau_termine/utilisateur/:id', async(req: Request, res: Response) =>{
+        try{
+            const id = +req.params.id;
+            // verification de l'id
+            if (id <= 0) {
+                return res.status(400).json({ error: "L'ID doit être un entier positif" });
+            }
+            const exercice = await Niveau_termineDAO.DernierNiveauTermineByUser(id);
+            res.status(200).send(exercice);
+        }
+        catch(err){
+            res.status(500).send(err);
+        }
+    });
+
+    //récupération du dernier niveau terminé de plusieurs utilisateurs
+    router.get('/dernier_niveau_termine/utilisateurs', async(req: Request, res: Response) =>{
+        try{
+            const id = +req.params.id;
+            // verification de l'id
+            if (id <= 0) {
+                return res.status(400).json({ error: "L'ID doit être un entier positif" });
+            }
+            const exercice = await Niveau_termineDAO.AllDernierNiveauTermine();
+            res.status(200).send(exercice);
+        }
+        catch(err){
+            res.status(500).send(err);
+        }
+    })
+
+
 
     return router;
 };

@@ -3,6 +3,20 @@ const API = "http://127.0.0.1:8080/api"
 export {}
 /////////////utilisateur/////////////
 
+async function connexionUtilisateur(email : string, mdp : string){
+    const response = await fetch(API + "/utilisateur/login", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            email : email, 
+            mdp : mdp
+        })
+    });
+}
+
 async function loadConnectedUtilisateur() {
     const utilisateurResponse = await fetch(API+ "/utilisateur/me",{
         method: "GET",
@@ -61,14 +75,6 @@ async function loadExercices(){
         method: "GET",
     });
     let exercices = await exercicesResponse.json();
-
-    // exercices.forEach(async e => {
-    //     let id_exo = e.id;
-    //     const exerciceResponse = await fetch(API + "/exercice/"+id_exo, { 
-    //         method: "GET",
-    //         credentials: "include"
-    //     });
-    // });
 
     return exercices;
 }

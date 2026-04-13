@@ -22,12 +22,7 @@ export interface AuthRequest extends Request{
 }
 
 export const requireAuth =async (req: AuthRequest, res : Response, next : NextFunction) =>{
-    const authHeader = req.headers.authorization;
-    if(!authHeader || !authHeader.startsWith("Bearer ")){
-        return res.status(401).json({erreur : "Mauvais header"});
-        // return;
-    }
-    const token = authHeader.split(" ")[1];
+    const token = req.cookies.token;
 
     if (!token){
         return res.status(401).json({erreur : "token invalide"});
@@ -38,6 +33,6 @@ export const requireAuth =async (req: AuthRequest, res : Response, next : NextFu
         next();
     }
     catch(err){
-        return res.status(403).json({erreur : "Problème de permission"});
+        return res.status(403).json({erreur : "mauvais token"});
     }
 };
