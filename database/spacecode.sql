@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS Exercices
   Instruction   VARCHAR NULL    ,
   Code_exercice VARCHAR NULL    ,
   Code_solution VARCHAR NULL    ,
+  Doc				 VARCHAR NULL    ,
   Id_niveau     INTEGER NOT NULL,
   PRIMARY KEY (Id_exercice),
   FOREIGN KEY (Id_niveau) REFERENCES Niveau (Id_niveau) ON DELETE CASCADE 
@@ -42,7 +43,7 @@ CREATE TABLE IF NOT EXISTS Indices
   Id_indice   INTEGER NOT NULL,
   Id_exercice INTEGER NOT NULL,
   Instruction VARCHAR NULL    ,
-  Ordre       INT     NULL    ,
+  Ordre       INTEGER NULL    ,
   PRIMARY KEY (Id_indice), 
   FOREIGN KEY (Id_exercice) REFERENCES Exercices (Id_exercice) ON DELETE CASCADE 
 );
@@ -52,7 +53,6 @@ CREATE TABLE IF NOT EXISTS Niveau
 (
   Id_niveau  INTEGER NOT NULL,
   Nom        VARCHAR NULL    ,
-  Nom_etoile VARCHAR NULL    ,
   Id_cours   INTEGER NOT NULL,
   PRIMARY KEY (Id_niveau),
   FOREIGN KEY (Id_cours) REFERENCES Cours (Id_cours) ON DELETE CASCADE 
@@ -76,11 +76,11 @@ INSERT OR IGNORE INTO Cours (Id_cours, Nom) VALUES
 (2, 'Programmation Python');
 
 
-INSERT OR IGNORE INTO Niveau (Id_niveau, Nom, Nom_etoile, Id_cours) VALUES
-(1, 'Débutant', 'Bronze', 1),
-(2, 'Intermédiaire', 'Argent', 1),
-(3, 'Avancé', 'Or', 1),
-(4, 'Débutant', 'Bronze', 2);
+INSERT OR IGNORE INTO Niveau (Id_niveau, Nom, Id_cours) VALUES
+(1, 'Débutant', 1),
+(2, 'Intermédiaire', 1),
+(3, 'Avancé', 1),
+(4, 'Débutant', 2);
 
 
 INSERT OR IGNORE INTO Exercices (Id_exercice, Nom, Instruction, Code_exercice, Code_solution, Id_niveau) VALUES
@@ -219,6 +219,11 @@ INSERT OR IGNORE INTO Indices (Id_indice, Id_exercice, Instruction, Ordre) VALUE
 (3, 2, 'Attention aux guillemets', 2),
 (4, 3, 'Utilise JOIN ... ON', 1),
 (5, 4, 'Une sous-requête est nécessaire', 1);
+
+INSERT OR IGNORE INTO Niveaux_termines (Id_utilisateur, Id_niveau) VALUES 
+(1,1),
+(1,2),
+(2,1);
 
 PRAGMA foreign_keys=ON;
 
