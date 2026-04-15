@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "@nestjs/passport": "^11.0.5",
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "express-session": "^1.19.0",
+    "js": "^0.1.0",
+    "passport": "^0.7.0",
+    "passport-local": "^1.0.0",
+    "sqlite3": "^5.1.7"
+  },
+  "devDependencies": {
+    "@types/passport-local": "^1.0.38",
+    "@types/sqlite3": "^5.1.0",
+    "concurrently": "^8.0.0"
+  },
+  "scripts": {
+    "front": "npm start --prefix spacecode",
+    "api": "npm start --prefix api",
+    "start": "concurrently \"npm run front\" \"npm run api\""
+  }
+}

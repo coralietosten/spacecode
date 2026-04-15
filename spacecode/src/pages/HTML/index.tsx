@@ -83,14 +83,12 @@ export default class HTML extends React.Component<Props, State> {
     movestars(deltaY: number = 0, velocityY: number = 0) {
 
 
-        console.log(deltaY, velocityY)
         if (deltaY < 0 && this.index_star_data + 1 < this.starsData.length) {
             this.index_star_data++
         } else if (deltaY > 0 && this.index_star_data > 0) {
             this.index_star_data--
         }
 
-        console.log(this.index_star_data)
 
         for (const index_star in this.starpossRef) {
             if (this.starpossRef[index_star] === null) {
