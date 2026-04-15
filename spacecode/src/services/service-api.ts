@@ -1,0 +1,112 @@
+const API = "http://127.0.0.1:8080/api"
+
+export {}
+/////////////utilisateur/////////////
+
+async function connexionUtilisateur(email : string, mdp : string){
+    const response = await fetch(API + "/utilisateur/login", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            email : email, 
+            mdp : mdp
+        })
+    });
+}
+
+async function loadConnectedUtilisateur() {
+    const utilisateurResponse = await fetch(API+ "/utilisateur/me",{
+        method: "GET",
+        credentials: "include"
+    });
+    let utilisateur = await utilisateurResponse.json();
+    return utilisateur;
+}
+
+async function createUtilisateur(nom : string, prenom : string, email: string, mdp: string){ //mdp ?
+    const response = await fetch(API + "/utilisateur", {
+        method: "POST",
+        credentials: "include",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            nom : nom,
+            prenom : prenom, 
+            email : email, 
+            mdp : mdp, 
+        })
+    });
+}
+
+
+/////////////exercice/////////////
+
+export async function loadExercice(id_exo: number){
+    const exerciceResponse = await fetch(API + "/exercice/"+id_exo, { 
+        method: "GET"
+    });
+
+    let exercice = await exerciceResponse.json();
+
+    return exercice;
+}
+
+async function loadExercicesByCours(id_cours:number){
+    const exercicesResponse = await fetch(API + "/exercices/cours/"+id_cours, { 
+        method: "GET",
+    });
+    let exercices = await exercicesResponse.json();
+    return exercices;
+}
+
+async function loadExercicesByNiveau(id_niveau:number){
+    const exercicesResponse = await fetch(API + "/exercices/cours/"+id_niveau, { 
+        method: "GET",
+    });
+    let exercices = await exercicesResponse.json();
+    return exercices;
+}
+
+async function loadExercices(){
+    const exercicesResponse = await fetch(API + "/exercices", { 
+        method: "GET",
+    });
+    let exercices = await exercicesResponse.json();
+
+    return exercices;
+}
+
+/////////////indice/////////////
+
+
+export async function loadIndice(id_indice:number){
+    const indiceResponse = await fetch(API + "/indice/"+id_indice, { 
+        method: "GET",
+    });
+    let indice = await indiceResponse.json();
+    return indice;
+}
+
+export async function loadIndicesByExo(id_exo:number){
+    const indicesResponse = await fetch(API + "/indice/exercice/"+id_exo, { 
+        method: "GET",
+    });
+    let indices = await indicesResponse.json();
+    console.log(indices);
+    return indices[0];
+}
+
+async function loadIndices(){
+    const indicesResponse = await fetch(API + "/indices", { 
+        method: "GET",
+    });
+    let indices = await indicesResponse.json();
+    return indices;
+}
+
+
+

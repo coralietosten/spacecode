@@ -45,7 +45,7 @@ export default class Base extends React.Component<Props, State> {
                         const xpos = this.centerx + (Math.sin(anglais) * distance!)
                         const ypos = this.centery + (Math.cos(anglais) * distance!)
 
-                        return <Partail xpos={xpos} ypos={ypos} nom={elem.nom} href={elem.href} />
+                        return <Partail key={elem.nom} xpos={xpos} ypos={ypos} nom={elem.nom} href={elem.href} />
                     })
                 }
                 <PlanetarySystem nbplanet={3} />

@@ -1,0 +1,115 @@
+{
+    "exercices": [
+        {
+            "id": 1,
+            "instructionTitre": "Niveau 1",
+            "instructionText": "Vous devez corriger le programme en utilisant les balises HTML de base : <h1>, <p>.",
+            "defaultCode": [    
+                {
+                    "balise": "f1",
+                    "attributs": {},
+                    "autoClose": false,
+                    "text" : "Mon premier code HTML",
+                    "contenus": []
+                },
+                {
+                    "balise": "p",
+                    "attributs": {},
+                    "autoClose": false,
+                    "text" : "Ceci est mon premier code HTML.",
+                    "contenus": []
+                }
+            ],
+            "solutionCode": [
+                {
+                    "balise": "AnyThing",
+                    "attributs": {},
+                    "autoClose": false,
+                    "text" : "",
+                    "contenus": []
+                },
+                {
+                    "balise": "h1",
+                    "attributs": {},
+                    "autoClose": false,
+                    "text" : "Mon premier code HTML",
+                    "contenus": []
+                },
+                {
+                    "balise": "p",
+                    "attributs": {},
+                    "autoClose": false,
+                    "text" : "Ceci est mon premier code HTML.",
+                    "contenus": []
+                },
+                {
+                    "balise": "AnyThing",
+                    "attributs": {},
+                    "autoClose": false,
+                    "text" : "",
+                    "contenus": []
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "instructionTitre": "Niveau 2",
+            "instructionText": "Vous devez corriger le programme en utilisant les balises HTML de base : <ul>, <li>.",
+            "defaultCode": [
+                {
+                    "balise": "div",
+                    "attributs": {},
+                    "autoClose": false,
+                    "text" : "",
+                    "contenus": [
+                        {
+                            "balise": "p",
+                            "attributs": {},
+                            "autoClose": false,
+                            "text" : "Voici le premier élément de ma liste.",
+                            "contenus": []
+                        },
+                        {
+                            "balise": "li",
+                            "attributs": {},
+                            "autoClose": false,
+                            "text" : "Voici le deuxième élément de ma liste.",
+                            "contenus": []
+                        }
+                    ]
+                }
+            ],
+            "solutionCode": [
+                {
+                    "balise": "AnyThing",
+                    "attributs": {},
+                    "autoClose": false,
+                    "text" : "",
+                    "contenus": []
+                },
+                {
+                    "balise": "ul",
+                    "attributs": {},
+                    "autoClose": false,
+                    "text" : "",
+                    "contenus": [
+                        {
+                            "balise": "li",
+                            "attributs": {},
+                            "autoClose": false,
+                            "text" : "Voici le premier élément de ma liste.",
+                            "contenus": []
+                        },
+                        {
+                            "balise": "li",
+                            "attributs": {},
+                            "autoClose": false,
+                            "text" : "Voici le deuxième élément de ma liste.",
+                            "contenus": []
+                        }
+                    ]
+                }
+            ]
+        }   
+    ]
+}

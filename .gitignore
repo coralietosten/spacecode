@@ -1,7 +1,11 @@
 ignore/*
 node_modules/*
 
+api/node_modules
+
 test.*
 package-lock.json
 
 .env
+
+*.db

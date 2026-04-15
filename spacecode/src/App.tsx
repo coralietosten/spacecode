@@ -4,13 +4,15 @@ import "./App.css"
 
 import Home from "./pages/Home"
 import Exercices from "./pages/Exercices"
-import Exo1 from "./pages/Exo1"
 import Animation from './pages/Animation';
 import Base from './pages/Base';
 import HTML from './pages/HTML';
-import Myexo from './pages/Myexo';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Tablet from './compenents/Tablet';
+import Introduction from './pages/Introduction';
+import Connection from './pages/Connection';
+import Register from './pages/Register';
 
 function App() {
   
@@ -20,18 +22,15 @@ function App() {
       <Routes>
 
         <Route path="/" element={<Home />} />
+        <Route path="/introduction" element={<Introduction />} />
+        <Route path="/connection" element={<Connection />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/exercice" element={<Exercices />} />
-        <Route path="/exercice/1" element={<Exo1/>} />
         <Route path="/anim" element={<Animation/>} />
         <Route path="/base" element={<Base/>} />
         <Route path="/HTML" element={<HTML/>} />
-        <Route path="/myexo" element={<Myexo/>} />
 
       </Routes>
-
-      <footer>
-          <h3><a href="/"> Retour a l'acceuil</a></h3>
-      </footer>
 
     </BrowserRouter>
     

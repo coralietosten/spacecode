@@ -1,0 +1,18 @@
+.tablettt{
+    position: relative;
+
+    display: flex;
+    /* background-image: url("./backgroundTablet.svg"); */
+    background-image: url("./backgroundTablet.png");
+    background-repeat: repeat;
+    z-index: 1;
+
+    height: 709px;
+
+    justify-self: center;
+
+    width: 100%;
+    overflow: hidden;
+
+    justify-content: center;
+}

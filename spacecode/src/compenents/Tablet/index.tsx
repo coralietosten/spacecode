@@ -5,159 +5,94 @@ import React from "react";
 import "./styles.css";
 
 import TabletEdge from "../TabletEdge"
-import Editor from '@monaco-editor/react';
-import DOMPurify from 'dompurify';
+import Templat from "../Templat";
 
-declare global {// to del
-    interface Window {
-        _blinkInterval?: NodeJS.Timeout;
+import data from "../../compenents/DataBase.json";
+import { loadExercice } from "../../services/service-api"
+
+import gsap from "gsap";
+
+
+type State = {
+    nbcomplet: number
+    exerciceContent: {
+        instructionTitre: string,
+        instructionText: string,
+        defaultCode: any[],
+        solutionCode: any[]
     }
 }
 
-type State = {
-    codeAffiche: string
-    nbcomplet: number
-}
 type Props = {
-    instructionTitre: string;
-    instructionText: string;
-    defaultCode: string;
-    solutionCode: string[];
+    onCrossClick: () => void
 };
 
 export default class Tablet extends React.Component<Props, State> {
 
+
     constructor(props: Props) {
-        super(props)
+
+        super(props);
 
         this.state = {
-            codeAffiche: props.defaultCode,
-            nbcomplet: 0
-        }
-    }
-
-
-    exerciceComplet = () => {
-        if (true) // vérifie la complession
-        {
-            this.setState({ nbcomplet: this.state.nbcomplet + 1 })
-        }
-    }
-
-
-
-    ///
-
-    skipSpaces = (html: string, i: number): number => {
-        while (i < html.length && /\s/.test(html[i])) i++;
-        return i;
-    };
-
-    match = (html: string, i: number, str: string): boolean => {
-        i = this.skipSpaces(html, i);
-        if (html.startsWith(str, i)) {
-            return true;
-        }
-        return false;
-    };
-
-    verifyExoCompletion = (html: string) => {
-
-        let i = 0;
-
-        for (let solution of this.props.solutionCode) {
-
-
-            i = this.skipSpaces(html, i);
-
-            if (!this.match(html, i, solution)) {
-                return false;
+            nbcomplet: 0,
+            exerciceContent: {
+                instructionTitre: "",
+                instructionText: "",
+                defaultCode: [],
+                solutionCode: []
             }
-
-            i += solution.length;
         }
 
-        return true;
-    };
+    }
 
-    onChange = (newValue: string | undefined) => {
+    nextExercice = () => {
+        this.setState({ nbcomplet: this.state.nbcomplet + 1 })
 
-        if (newValue === undefined) {
-            return
-        }
+        //TODO next exercice
+    }
 
-        this.setState({ codeAffiche: newValue });
+    componentDidMount(): void {
+        const template = document.querySelector(".tablet")
 
-        if (this.verifyExoCompletion(newValue)) {
+        gsap.fromTo(template,
+            { width: "0px" },
+            {
+                width: "100%",
+                duration: 1.5,
+                ease: "power3.inOut",
+                clearProps: "width"
+            }
+        );
 
-            console.log('Table with tr found');
+        loadExercice(1).then(data => {
 
-            const display = document.querySelector(".result-zone") as HTMLElement;
-            console.log(display)
-            if (display !== null) {
-                let blink = true;
-                if (window._blinkInterval) {
-                    clearInterval(window._blinkInterval);
+            this.setState({
+                exerciceContent: {
+                    instructionTitre: data.nom,
+                    instructionText: data.instruction,
+                    defaultCode: JSON.parse(data.code_exercice),
+                    solutionCode: JSON.parse(data.code_solution)
                 }
-                window._blinkInterval = setInterval(() => {
-                    display.style.color = blink ? '#90EE90' : '';
-                    blink = !blink;
-                }, 200);
-            }
-        } else {
-            console.log('Structure incorrecte');
-            if (window._blinkInterval) {
-                clearInterval(window._blinkInterval);
-                window._blinkInterval = undefined;
-            }
-        }
-    };
+            });
+        });
+    }
 
-
-    ///
 
     render() {
         return (
             <div className="tablet">
                 <TabletEdge value={this.state.nbcomplet} />
-                <div className="tablet-content">
-                    <div>
-                        <h1>{this.props.instructionTitre}</h1>
-                        <p>{this.props.instructionText}</p>
-                    </div>
-                    <div>
-                        <div className="code-zone">
-                            <div className="menu-code-zone">
-                                <button><span>Doc</span> <img src="/assets/docIcon.svg" alt="document" /></button>
-                                <button><span>Aide</span><img src="/assets/aideIcon.svg" alt="aide" /></button>
-                                <button><span>Réinisialiser</span> <img src="/assets/reinisialiserIcon.svg" alt="reset" /></button>
-                            </div>
-                            <div className="editor-container">
-                                <Editor
-                                    height="500px"
-                                    width="500px"
-                                    language="html"
-                                    theme="vs-dark"
-                                    value={this.state.codeAffiche}
-                                    onChange={(val) => this.onChange(val)}
-                                    options={{
-                                        automaticLayout: true,
-                                        minimap: { enabled: true },
-                                        suggest: { showKeywords: true, showSnippets: true }
-                                    }}
-                                />
-                            </div>
-                            <div className="menu-code-zone">
-                                <button className="bouton-valider" onClick={this.exerciceComplet}><span>Valdier</span></button>
-                            </div>
-                        </div>
+                <img onClick={() => this.props.onCrossClick()} className="tablet_cross" src="/assets/croix.svg" alt="croix" />
+                <Templat
+                    instructionTitre={this.state.exerciceContent.instructionTitre}
+                    instructionText={this.state.exerciceContent.instructionText}
+                    defaultCode={this.state.exerciceContent.defaultCode}
+                    solutionCode={this.state.exerciceContent.solutionCode}
 
-
-                        <div className="result-zone" dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(this.state.codeAffiche) }} />
-
-                    </div>
-                </div>
-                <TabletEdge value={this.state.nbcomplet} rotate={180} />
+                    onValidation={() => this.nextExercice()}
+                />
+                <TabletEdge value={this.state.nbcomplet} right={true} />
 
             </div >
         )
