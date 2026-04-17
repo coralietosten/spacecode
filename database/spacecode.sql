@@ -72,8 +72,9 @@ CREATE TABLE IF NOT EXISTS Utilisateur
 
 
 INSERT OR IGNORE INTO Cours (Id_cours, Nom) VALUES
-(1, 'Programmation SQL'),
-(2, 'Programmation Python');
+(1, 'HTML'),
+(2, 'CSS'),
+(3, 'JavaScript');
 
 
 INSERT OR IGNORE INTO Niveau (Id_niveau, Nom, Id_cours) VALUES
@@ -200,11 +201,88 @@ INSERT OR IGNORE INTO Exercices (Id_exercice, Nom, Instruction, Code_exercice, C
     "text": "Comprendre pourquoi toutes les étoiles se sont éteintes",
     "contenus": []
   }
-]', 1),
-(2, 'WHERE simple', 'Sélectionner les utilisateurs nommés Dupont', 'SELECT * FROM Utilisateur WHERE Nom = ?;', 'SELECT * FROM Utilisateur WHERE Nom = ''Dupont'';', 1),
-(3, 'JOIN simple', 'Afficher les niveaux avec leur cours', 'SELECT ...', 'SELECT n.Nom, c.Nom FROM Niveau n JOIN Cours c ON n.Id_cours = c.Id_cours;', 2),
-(4, 'Sous-requête', 'Lister les exercices terminés par un utilisateur', 'SELECT ...', 'SELECT * FROM Exercices WHERE Id_exercice IN (SELECT Id_exercice FROM Exercices_termines);', 3),
-(5, 'Python print', 'Afficher Hello World', 'print()', 'print("Hello World")', 4);
+]', 1);
+
+INSERT OR IGNORE INTO Exercices (Id_exercice, Nom, Instruction, Code_exercice, Code_solution, Id_niveau) VALUES
+(2, 'Listes HTML', 'Remplacer des balises <p> par des listes <ul> et <li>.',
+
+'[
+    { "balise": "p", "attributs": {}, "autoClose": false, "text": "Courses", "contenus": [] },
+    { "balise": "p", "attributs": {}, "autoClose": false, "text": "Pommes", "contenus": [] },
+    { "balise": "p", "attributs": {}, "autoClose": false, "text": "Bananes", "contenus": [] },
+    { "balise": "p", "attributs": {}, "autoClose": false, "text": "Oranges", "contenus": [] }
+]',
+
+'[
+    {
+        "balise": "h2",
+        "attributs": {},
+        "autoClose": false,
+        "text": "Courses",
+        "contenus": []
+    },
+    {
+        "balise": "ul",
+        "attributs": {},
+        "autoClose": false,
+        "text": "",
+        "contenus": [
+            { "balise": "li", "attributs": {}, "autoClose": false, "text": "Pommes", "contenus": [] },
+            { "balise": "li", "attributs": {}, "autoClose": false, "text": "Bananes", "contenus": [] },
+            { "balise": "li", "attributs": {}, "autoClose": false, "text": "Oranges", "contenus": [] }
+        ]
+    }
+]', 1);
+
+INSERT OR IGNORE INTO Exercices (Id_exercice, Nom, Instruction, Code_exercice, Code_solution, Id_niveau) VALUES
+(3, 'Liens HTML', 'Transformer des textes en liens avec la balise <a> et un attribut href.',
+
+'[
+    { "balise": "p", "attributs": {}, "autoClose": false, "text": "Google", "contenus": [] },
+    { "balise": "p", "attributs": {}, "autoClose": false, "text": "YouTube", "contenus": [] }
+]',
+
+'[
+    {
+        "balise": "a",
+        "attributs": { "href": "https://www.google.com" },
+        "autoClose": false,
+        "text": "Google",
+        "contenus": []
+    },
+    {
+        "balise": "a",
+        "attributs": { "href": "https://www.youtube.com" },
+        "autoClose": false,
+        "text": "YouTube",
+        "contenus": []
+    }
+]', 1);
+
+INSERT OR IGNORE INTO Exercices (Id_exercice, Nom, Instruction, Code_exercice, Code_solution, Id_niveau) VALUES
+(4, 'Images HTML', 'Remplacer des balises <p> par des images avec la balise <img> et l’attribut src.',
+
+'[
+    { "balise": "p", "attributs": {}, "autoClose": false, "text": "image_chat.jpg", "contenus": [] },
+    { "balise": "p", "attributs": {}, "autoClose": false, "text": "image_chien.jpg", "contenus": [] }
+]',
+
+'[
+    {
+        "balise": "img",
+        "attributs": { "src": "image_chat.jpg", "alt": "Chat" },
+        "autoClose": true,
+        "text": "",
+        "contenus": []
+    },
+    {
+        "balise": "img",
+        "attributs": { "src": "image_chien.jpg", "alt": "Chien" },
+        "autoClose": true,
+        "text": "",
+        "contenus": []
+    }
+]', 1);
 
 
 INSERT OR IGNORE INTO Utilisateur (Id_utilisateur, Nom, Prenom, Mdp, Photo, Email) VALUES
@@ -214,11 +292,20 @@ INSERT OR IGNORE INTO Utilisateur (Id_utilisateur, Nom, Prenom, Mdp, Photo, Emai
 
 
 INSERT OR IGNORE INTO Indices (Id_indice, Id_exercice, Instruction, Ordre) VALUES
-(1, 1, 'Les balises utilisés sont <h1>, <h2>, <h3>, et <h4>', 1),
-(2, 2, 'Ajoute une clause WHERE', 1),
-(3, 2, 'Attention aux guillemets', 2),
-(4, 3, 'Utilise JOIN ... ON', 1),
-(5, 4, 'Une sous-requête est nécessaire', 1);
+(1, 1, 'Les balises utilisés sont <h1>, <h2>, <h3>, et <h4>', 1);
+
+INSERT OR IGNORE INTO Indices (Id_indice, Id_exercice, Instruction, Ordre) VALUES
+(2, 2, 'Utilise une balise <ul> pour contenir la liste.', 1),
+(3, 2, 'Chaque élément de la liste doit être dans une balise <li>.', 2),
+
+(4, 3, 'La balise <a> permet de créer un lien.', 1),
+(5, 3, 'Utilise l’attribut href pour indiquer l’adresse du lien.', 2),
+
+(6, 4, 'La balise <img> permet d’afficher une image.', 1),
+(7, 4, 'Utilise l’attribut src pour définir le chemin de l’image.', 2),
+(8, 4, 'L’attribut alt permet de décrire l’image.', 3);
+
+
 
 INSERT OR IGNORE INTO Niveaux_termines (Id_utilisateur, Id_niveau) VALUES 
 (1,1),

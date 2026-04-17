@@ -13,9 +13,9 @@ const UserDAO = {
         const users = data.map((utilisateur: any) => new UtilisateurModel(utilisateur));
 
         //suppression des mdp
-        users.forEach((user: any) => {
-            user.mdp = null;
-        });
+        // users.forEach((user: any) => {
+        //     user.mdp = null;
+        // });
 
         return users;
     },
@@ -75,12 +75,3 @@ const UserDAO = {
 };
 
 module.exports = UserDAO;
-
-// Fermer la base de données
-// db.close((err: any) => {
-//     if (err) {
-//         console.error(err.message);
-//     } else {
-//         console.log('Fermeture de la base de données.');
-//     }
-// });

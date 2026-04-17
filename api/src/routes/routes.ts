@@ -208,7 +208,7 @@ module.exports = () => {
     });
 
     //modification d'un utilisateur
-    router.put('/utilisateur/:id_user', async (req : Request, res : Response) => {
+    router.put('/utilisateur/:id_utilisateur', async (req : Request, res : Response) => {
         try {
             const id_user = +req.params.id_user;
             const {nom, prenom, email, mdp} = req.body;
@@ -259,8 +259,6 @@ module.exports = () => {
             res.status(500).json({err : "erreur " + err});
         }
     });
-
-
 
 
     //-------------------------------exercices-----------------------------------------------------
