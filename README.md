@@ -2,7 +2,7 @@
 
 SpaceCode est une application éducative interactive d'apprentissage du code web (HTML, CSS, JavaScript) sous forme de jeu spatial. Les joueurs progressent à travers différents niveaux et cours en résolvant des exercices de code pour réparer des vaisseaux spatiaux et rallumer des étoiles.
 
-## 🏗️ Architecture du projet
+## Architecture du projet
 
 Le projet est structuré en deux applications distinctes communiquant via une API REST :
 
@@ -82,7 +82,7 @@ spacecode/
 - **Fichier de données :** `database/spacecode2.db` (généré automatiquement)
 - **Tables :** Cours, Niveau, Exercices, Indices, Utilisateur, Niveaux_termines
 
-## 🚀 Lancer le projet
+## Lancer le projet
 
 ### Prérequis
 - Node.js installé
@@ -100,7 +100,7 @@ Cette commande lance simultanément :
 - L'API sur `http://127.0.0.1:8080/api`
 - Le frontend React sur `http://localhost:3000`
 
-## 🌐 Accès distant (Université)
+## Accès distant (Université)
 
 Pour accéder au serveur distant de l'université :
 
@@ -117,7 +117,7 @@ ssh etudiants@172.26.83.12
 bash launchServeur.bash
 ```
 
-## 🗄️ Initialisation de la base de données SQLite
+## Initialisation de la base de données SQLite
 
 ### Fonctionnement
 
@@ -155,7 +155,7 @@ rm database/spacecode2.db
 
 2. Redémarrez l'API - le fichier sera recréé automatiquement
 
-## 🔧 Configuration
+## Configuration
 
 ### Variables d'environnement (API)
 
@@ -166,7 +166,7 @@ PORT=8080
 JWT_SECRET=votre_secret_jwt
 ```
 
-## 📝 Fonctionnalités principales
+## Fonctionnalités principales
 
 - **Authentification :** Inscription, connexion avec JWT et cookies sécurisés
 - **Système de progression :** Suivi des niveaux terminés par utilisateur
@@ -175,7 +175,7 @@ JWT_SECRET=votre_secret_jwt
 - **Interface immersive :** Thème spatial avec animations et planètes
 - **Multi-cours :** HTML, CSS, JavaScript avec niveaux de difficulté
 
-## 🔗 Endpoints API principaux
+## Endpoints API principaux
 
 ### Utilisateurs
 - `POST /api/utilisateur` - Créer un utilisateur
@@ -197,7 +197,7 @@ JWT_SECRET=votre_secret_jwt
 ### Progression
 - `GET /api/dernier_niveau_termine/utilisateur/:id` - Dernier niveau d'un utilisateur
 
-## 🛠️ Scripts disponibles (Référence)
+## Scripts disponibles (Référence)
 
 ### Racine
 - `npm start` - Lance API et frontend simultanément
